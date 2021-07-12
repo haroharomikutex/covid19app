@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "973088009834",
+    "project_id": "shizuokacovid19app",
+    "storage_bucket": "shizuokacovid19app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:973088009834:android:ea6e02e08718728944e413",
+        "android_client_info": {
+          "package_name": "com.haroharo.shizuoka"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "973088009834-sj3gulna1uubvdbegerd5sb9kgbnvfmo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD3EhgUFM9K912sj8xXCUmptrMlTqvno34"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "973088009834-sj3gulna1uubvdbegerd5sb9kgbnvfmo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
