@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.util.SparseBooleanArray;
@@ -14,6 +15,7 @@ import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,6 +25,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.Random;
+
+import static android.widget.ProgressBar.*;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -42,6 +46,8 @@ public class MainActivity extends AppCompatActivity {
 		setContentView(R.layout.main);
 		initialize(_savedInstanceState);
 		initializeLogic();
+
+
 		
 
 	}
@@ -73,16 +79,17 @@ public class MainActivity extends AppCompatActivity {
 			@Override
 			public void onPageStarted(WebView _param1, String _param2, Bitmap _param3) {
 				final String _url = _param2;
-				
 				super.onPageStarted(_param1, _param2, _param3);
+
 			}
-			
+
 			@Override
 			public void onPageFinished(WebView _param1, String _param2) {
 				final String _url = _param2;
-				
 				super.onPageFinished(_param1, _param2);
+
 			}
+
 		});
 		
 		_fab.setOnClickListener(new View.OnClickListener() {
@@ -172,5 +179,16 @@ public class MainActivity extends AppCompatActivity {
 	public int getDisplayHeightPixels(){
 		return getResources().getDisplayMetrics().heightPixels;
 	}
-	
+	public boolean shouldOverrideUrlLoading(WebView view, String url) {
+		if( url.startsWith("http:") || url.startsWith("https:") ) {
+			return false;
+		}
+
+		// Otherwise allow the OS to handle it
+		Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+		startActivity( intent );
+		return true;
+	}
+
+
 }
