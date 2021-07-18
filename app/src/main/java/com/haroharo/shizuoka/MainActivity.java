@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
 	private AlertDialog.Builder pop;
 	@Override
 	protected void onCreate(Bundle _savedInstanceState) {
+		setTheme(R.style.AppTheme);
 		super.onCreate(_savedInstanceState);
 		setContentView(R.layout.main);
 		initialize(_savedInstanceState);

@@ -4,4 +4,5 @@
 	<color	name="colorAccent">#689F38</color>
 	<color	name="colorControlHighlight">#AED581</color>
 	<color	name="colorControlNormal">#AED581</color>
+	<color	name="WelcomePage">#FFFFFF</color>
 </resources>
