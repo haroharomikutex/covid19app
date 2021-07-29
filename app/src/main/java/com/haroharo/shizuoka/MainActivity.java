@@ -52,24 +52,14 @@ public class MainActivity extends AppCompatActivity {
 		
 
 	}
-	
 
-	
-	
+
+
+
 	private void initialize(Bundle _savedInstanceState) {
-		
-		_toolbar = (Toolbar) findViewById(R.id._toolbar);
-		setSupportActionBar(_toolbar);
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-		getSupportActionBar().setHomeButtonEnabled(true);
-		_toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View _v) {
-				onBackPressed();
-			}
-		});
+
 		_fab = (FloatingActionButton) findViewById(R.id._fab);
-		
+
 		webview1 = (WebView) findViewById(R.id.webview1);
 		webview1.getSettings().setJavaScriptEnabled(true);
 		webview1.getSettings().setSupportZoom(true);
@@ -96,12 +86,12 @@ public class MainActivity extends AppCompatActivity {
 		_fab.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View _view) {
-				webview1.loadUrl("https://stopcovid19byshizuoka.jimdofree.com/");
+				webview1.loadUrl("https://appshizuoka.gq");
 			}
 		});
 	}
 	private void initializeLogic() {
-		webview1.loadUrl("https://stopcovid19byshizuoka.jimdofree.com/");
+		webview1.loadUrl("https://appshizuoka.gq");
 		vib.vibrate((long)(100));
 		pop.setTitle("ようこそ");
 		pop.setIcon(R.drawable.app_icon);
