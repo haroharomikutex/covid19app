@@ -9,6 +9,7 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.util.TypedValue;
 import android.view.View;
@@ -48,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
 		setContentView(R.layout.main);
 		initialize(_savedInstanceState);
 		initializeLogic();
-
+		//TutorialActivity.Companion.showIfNeeded(MainActivity.this,_savedInstanceState);
 
 	}
 
@@ -260,10 +261,10 @@ public class MainActivity extends AppCompatActivity {
 				/* 読み込みが完了すると呼ばれるメソッド */
 				@Override
 				public void onPageFinished(WebView wb, String url) {
-					super.onPageFinished(wb, url);
-
-					//消す
-					mProgressBar.setVisibility(View.INVISIBLE);
+					Log.d("MYLOG","finish1");
+				super.onPageFinished(wb, url);
+					//削除
+					mProgressBar.setVisibility(View.GONE);
 				}
 			});
 		}
