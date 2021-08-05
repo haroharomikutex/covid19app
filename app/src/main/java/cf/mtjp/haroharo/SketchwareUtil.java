@@ -1,4 +1,4 @@
-package com.haroharo.shizuoka;
+package cf.mtjp.haroharo;
 
 import android.content.Context;
 import android.util.SparseBooleanArray;

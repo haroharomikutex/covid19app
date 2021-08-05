@@ -1,4 +1,4 @@
-package com.haroharo.shizuoka;
+package cf.mtjp.haroharo;
 
 import android.content.ContentResolver;
 import android.content.ContentUris;

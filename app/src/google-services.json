@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "912280473320",
+    "project_id": "shizusuma",
+    "storage_bucket": "shizusuma.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:912280473320:android:7a61e3e4310353fba2035d",
+        "android_client_info": {
+          "package_name": "cf.mtjp.haroharo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "912280473320-96lbiuapfp3idnkjshmvjske4fum9u3r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBlLo6Nvd0f7HDXatlSSEfi4Fj4nTqWnik"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "912280473320-96lbiuapfp3idnkjshmvjske4fum9u3r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

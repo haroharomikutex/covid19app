@@ -1,4 +1,4 @@
-package com.haroharo.shizuoka;
+package cf.mtjp.haroharo;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -9,28 +9,22 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Vibrator;
-import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.util.TypedValue;
 import android.view.View;
-import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.Random;
-
-import static android.widget.ProgressBar.*;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -113,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
 		vib.vibrate((long) (100));
 		pop.setTitle("ようこそ");
 		pop.setIcon(R.drawable.app_icon);
-		pop.setMessage("この度は静岡県新型コロナウイルス対策アプリをダウンロード頂きありがとうございます。\nこのアプリは静岡県民の皆様に新型コロナウイルスに対する正しい知識を得て頂きたく作成いたしました。\n今後アップデートなどのアナウンスはこちらのTwitterアカウント（ https://mobile.twitter.com/Shizuoka_COVID ）より配信いたしますのでフォローの程よろしくお願い致します。\n\n==============\nこのアプリは静岡県公式のものではありません。\nバージョン3.0.0 \n");
+		pop.setMessage("この度は静岡県新型コロナウイルス対策アプリをダウンロード頂きありがとうございます。\nこのアプリは静岡県民の皆様に新型コロナウイルスに対する正しい知識を得て頂きたく作成いたしました。\n今後アップデートなどのアナウンスはこちらのTwitterアカウント（ https://mobile.twitter.com/Shizuoka_COVID ）より配信いたしますのでフォローの程よろしくお願い致します。\n\n==============\nこのアプリは静岡県公式のものではありません。\nバージョン1.0.0 \n");
 		pop.setPositiveButton("スタート", new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface _dialog, int _which) {

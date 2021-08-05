@@ -1,13 +1,8 @@
-package com.haroharo.shizuoka
+package cf.mtjp.haroharo
 
 import android.app.Activity
-import android.graphics.Bitmap
 import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import android.webkit.WebView
-import android.webkit.WebViewClient
 import com.stephentuso.welcome.*
 
 class TutorialActivity : WelcomeActivity() {

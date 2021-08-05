@@ -1,4 +1,4 @@
-package com.haroharo.shizuoka;
+package cf.mtjp.haroharo;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;

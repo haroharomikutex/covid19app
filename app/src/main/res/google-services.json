@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:973088009834:android:ea6e02e08718728944e413",
         "android_client_info": {
-          "package_name": "com.haroharo.shizuoka"
+          "package_name": "cf.mtjp.haroharo",
         }
       },
       "oauth_client": [

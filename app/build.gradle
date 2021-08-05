@@ -6,11 +6,11 @@ android {
 	compileSdkVersion 30
 	
 	defaultConfig {
-		applicationId "com.haroharo.shizuoka"
+		applicationId "cf.mtjp.haroharo"
 		minSdkVersion 21
 		targetSdkVersion 30
-		versionCode 4
-		versionName "2021.7.29"
+		versionCode 1
+		versionName "2021.8.05"
 	}
 	buildTypes {
 		release {

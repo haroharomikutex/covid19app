@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.stephentuso:welcome:1.4.1@aar">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/9c6eb2315dbeb5f75ef63c4229c64212/jetified-welcome-1.4.1/AndroidManifest.xml" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/9c6eb2315dbeb5f75ef63c4229c64212/jetified-welcome-1.4.1/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/9c6eb2315dbeb5f75ef63c4229c64212/jetified-welcome-1.4.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/3914e0e12da4995f0b16a8787514a60a/jetified-welcome-1.4.1/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/3914e0e12da4995f0b16a8787514a60a/jetified-welcome-1.4.1/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/3914e0e12da4995f0b16a8787514a60a/jetified-welcome-1.4.1/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.stephentuso/welcome/1.4.1/c86ec9d840d5592eb7499fb90335d14f301a1cb9/welcome-1.4.1-javadoc.jar!/" />
