@@ -20,7 +20,9 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -41,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
 	private Vibrator vib;
 	private MediaPlayer mp;
 	private AlertDialog.Builder pop;
+	private ProgressBar progressBar;
 
 	@Override
 	protected void onCreate(Bundle _savedInstanceState) {
@@ -49,8 +52,22 @@ public class MainActivity extends AppCompatActivity {
 		setContentView(R.layout.main);
 		initialize(_savedInstanceState);
 		initializeLogic();
-		//TutorialActivity.Companion.showIfNeeded(MainActivity.this,_savedInstanceState);
-
+		//TutorialActivity.Companion.showIfNeeded(MainActivity.this, _savedInstanceState);
+		progressBar = (ProgressBar) findViewById(R.id.sc_tov_pb_progress_bar);
+		progressBar.setVisibility(View.INVISIBLE);
+		webview1 = (WebView) findViewById(R.id.sc_tov_wv_tos);
+		webview1.setWebViewClient(new WebViewClient() {
+		@Override
+		public void onPageStarted(WebView view, String url, Bitmap favicon) {
+			super.onPageStarted(view, url, favicon);
+			progressBar.setVisibility(View.VISIBLE);
+		}
+		@Override
+		public void onPageFinished(WebView view, String url) {
+			super.onPageFinished(view,url);
+			progressBar.setVisibility(View.INVISIBLE);
+		}
+	});
 	}
 
 
@@ -69,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
 			public void onPageStarted(WebView _param1, String _param2, Bitmap _param3) {
 				final String _url = _param2;
 				super.onPageStarted(_param1, _param2, _param3);
+				//progressBar.setVisibility(View.VISIBLE);
 
 			}
 
@@ -76,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
 			public void onPageFinished(WebView _param1, String _param2) {
 				final String _url = _param2;
 				super.onPageFinished(_param1, _param2);
+				//progressBar.setVisibility(View.INVISIBLE);
 
 			}
 
@@ -103,6 +122,9 @@ public class MainActivity extends AppCompatActivity {
 		});
 		pop.create().show();
 	}
+
+
+
 
 	@Override
 	protected void onActivityResult(int _requestCode, int _resultCode, Intent _data) {
@@ -180,93 +202,5 @@ public class MainActivity extends AppCompatActivity {
 		Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
 		startActivity(intent);
 		return true;
-	}
-
-	public interface AppWebViewClientCallback {
-		/**
-		 * ページ表示直前ハンドル
-		 * <p>
-		 * Webページの表示直前に行う処理
-		 * </p>
-		 */
-		void onPageCommitVisibleHandle();
-	}
-
-	@Deprecated
-	public class AppWebViewClient extends WebViewClient {
-
-		/**
-		 * コールバック
-		 */
-		private final AppWebViewClientCallback callback;
-
-		/**
-		 * コンストラクタ
-		 *
-		 * @param callback コールバック
-		 */
-		public AppWebViewClient(AppWebViewClientCallback callback) {
-			this.callback = callback;
-		}
-
-		/**
-		 * ページ表示直前
-		 *
-		 * @param view WebView
-		 * @param url  URL
-		 */
-		@Override
-		public void onPageCommitVisible(WebView view, String url) {
-			super.onPageCommitVisible(view, url);
-
-			// Webページ表示直前処理を実施
-			callback.onPageCommitVisibleHandle();
-		}
-	}
-
-	public class MyWebView extends AppCompatActivity {
-
-		private ProgressBar mProgressBar;
-
-		protected void onCreate(Bundle savedInstanceState) {
-			super.onCreate(savedInstanceState);
-			setContentView(R.layout.main);
-
-			final WebView webView = findViewById(R.id.sc_tov_wv_tos);
-			mProgressBar = findViewById(R.id.sc_tov_pb_progress_bar);
-
-
-			webView.setWebChromeClient(new WebChromeClient() {
-
-				/* 読み込み状況を取得してプログレスバーにセット、表示 */
-				@Override
-				public void onProgressChanged(WebView wv, int progress) {
-					super.onProgressChanged(wv, progress);
-
-					mProgressBar.setProgress(progress);
-				}
-			});
-
-			webView.setWebViewClient(new WebViewClient() {
-
-				/* 読み込みを開始すると呼ばれるメソッド */
-				@Override
-				public void onPageStarted(WebView wb, String url, Bitmap bm) {
-					super.onPageStarted(wb, url, bm);
-
-					/* プログレスバーを表示 */
-					mProgressBar.setVisibility(View.VISIBLE);
-				}
-
-				/* 読み込みが完了すると呼ばれるメソッド */
-				@Override
-				public void onPageFinished(WebView wb, String url) {
-					Log.d("MYLOG","finish1");
-				super.onPageFinished(wb, url);
-					//削除
-					mProgressBar.setVisibility(View.GONE);
-				}
-			});
-		}
 	}
 }

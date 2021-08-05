@@ -35,7 +35,7 @@ class TutorialActivity : WelcomeActivity() {
     override fun configuration(): WelcomeConfiguration {
         return WelcomeConfiguration.Builder(this)
                 .defaultBackgroundColor(BackgroundColor(Color.RED))
-                .page(TitlePage(R.drawable.image, "Title"))
+                .page(TitlePage(R.drawable.app_icon, "Title"))
                 .page(BasicPage(
                         android.R.drawable.ic_delete,
                         "Basic page 1",
