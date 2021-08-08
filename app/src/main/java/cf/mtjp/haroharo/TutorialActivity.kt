@@ -29,22 +29,28 @@ class TutorialActivity : WelcomeActivity() {
      */
     override fun configuration(): WelcomeConfiguration {
         return WelcomeConfiguration.Builder(this)
-                .defaultBackgroundColor(BackgroundColor(Color.RED))
-                .page(TitlePage(R.drawable.default_image, "Title"))
+                .defaultBackgroundColor(BackgroundColor(Color.GRAY))
+                .page(TitlePage(R.drawable.image2, "静岡スマート情報ポータルへ\nようこそ"))
                 .page(BasicPage(
-                        android.R.drawable.alert_light_frame,
-                        "Basic page 1",
-                        "hogehoge")
-                        .background(BackgroundColor(Color.GREEN)))
+                        R.drawable.image5,
+                        "アプリについての簡単な紹介を致します。",
+                        "「SKIP」ボタンを押すことでこのチュートリアルを終了できます。")
+                        .background(BackgroundColor(Color.GRAY)))
                 .page(BasicPage(
-                        android.R.drawable.alert_dark_frame,
-                        "Basic page 2",
-                        "fugafuga")
-                        .background(BackgroundColor(Color.BLUE))
+                        R.drawable.image3,
+                        "静岡県内のお店で使える\nお得なクーポンを配信中",
+                        "掲載希望店舗も募集中です。")
+                        .background(BackgroundColor(Color.GRAY)))
+                .page(BasicPage(
+                        R.drawable.image4,
+                        "静岡県民おすすめの\n観光スポットも紹介中",
+                        "  ")
+                        .background(BackgroundColor(Color.GRAY))
                 )
                 .swipeToDismiss(true)
                 .build()
     }
+
 
     fun showIfNeeded(mainActivity: MainActivity, _savedInstanceState: Bundle) {
 
