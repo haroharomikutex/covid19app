@@ -17,11 +17,11 @@
         android:largeHeap="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity
-            android:name=".TutorialActivity">
-            android:name=".TutorialActivity"
-            android:theme="@style/WelcomeScreenTheme"
-        </activity>
+
+
+        <activity android:name=".TutorialActivity"
+            android:theme="@style/WelcomeScreenTheme"></activity>
+
 
         <activity
             android:name=".MainActivity"

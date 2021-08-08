@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
 	private MediaPlayer mp;
 	private AlertDialog.Builder pop;
 	private ProgressBar progressBar;
+	private TutorialActivity Companion;
 
 	@Override
 	protected void onCreate(Bundle _savedInstanceState) {
@@ -45,8 +46,7 @@ public class MainActivity extends AppCompatActivity {
 		super.onCreate(_savedInstanceState);
 		setContentView(R.layout.main);
 		initialize(_savedInstanceState);
-		initializeLogic();
-		//TutorialActivity.Companion.showIfNeeded(MainActivity.this, _savedInstanceState);
+		TutorialActivity.Companion.showIfNeeded(MainActivity.this,_savedInstanceState);
 		progressBar = (ProgressBar) findViewById(R.id.sc_tov_pb_progress_bar);
 		progressBar.setVisibility(View.INVISIBLE);
 		webview1 = (WebView) findViewById(R.id.sc_tov_wv_tos);

@@ -30,19 +30,23 @@ class TutorialActivity : WelcomeActivity() {
     override fun configuration(): WelcomeConfiguration {
         return WelcomeConfiguration.Builder(this)
                 .defaultBackgroundColor(BackgroundColor(Color.RED))
-                .page(TitlePage(R.drawable.app_icon, "Title"))
+                .page(TitlePage(R.drawable.default_image, "Title"))
                 .page(BasicPage(
-                        android.R.drawable.ic_delete,
+                        android.R.drawable.alert_light_frame,
                         "Basic page 1",
                         "hogehoge")
                         .background(BackgroundColor(Color.GREEN)))
                 .page(BasicPage(
-                        android.R.drawable.ic_btn_speak_now,
+                        android.R.drawable.alert_dark_frame,
                         "Basic page 2",
                         "fugafuga")
                         .background(BackgroundColor(Color.BLUE))
                 )
                 .swipeToDismiss(true)
                 .build()
+    }
+
+    fun showIfNeeded(mainActivity: MainActivity, _savedInstanceState: Bundle) {
+
     }
 }
