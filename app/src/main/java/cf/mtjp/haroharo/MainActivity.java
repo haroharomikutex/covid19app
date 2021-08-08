@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
 		super.onCreate(_savedInstanceState);
 		setContentView(R.layout.main);
 		initialize(_savedInstanceState);
+		initializeLogic();
 		TutorialActivity.Companion.showIfNeeded(MainActivity.this,_savedInstanceState);
 		progressBar = (ProgressBar) findViewById(R.id.sc_tov_pb_progress_bar);
 		progressBar.setVisibility(View.INVISIBLE);
