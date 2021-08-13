@@ -43,11 +43,11 @@ public class MainActivity extends AppCompatActivity {
 	@Override
 	protected void onCreate(Bundle _savedInstanceState) {
 		setTheme(R.style.AppTheme);
+		TutorialActivity.Companion.showIfNeeded(MainActivity.this,_savedInstanceState);
 		super.onCreate(_savedInstanceState);
 		setContentView(R.layout.main);
 		initialize(_savedInstanceState);
 		initializeLogic();
-		TutorialActivity.Companion.showIfNeeded(MainActivity.this,_savedInstanceState);
 		progressBar = (ProgressBar) findViewById(R.id.sc_tov_pb_progress_bar);
 		progressBar.setVisibility(View.INVISIBLE);
 		webview1 = (WebView) findViewById(R.id.sc_tov_wv_tos);
@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
 		pop.setPositiveButton("スタート", new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface _dialog, int _which) {
-				SketchwareUtil.showMessage(getApplicationContext(), "読み込み中...");
+				SketchwareUtil.showMessage(getApplicationContext(), "しばらくお待ちください...");
 			}
 		});
 		pop.create().show();
