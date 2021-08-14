@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.os.Vibrator;
 import android.util.SparseBooleanArray;
 import android.util.TypedValue;
+import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -18,9 +19,12 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.google.android.material.bottomnavigation.BottomNavigationMenuView;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -31,8 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 	private Toolbar _toolbar;
-	private FloatingActionButton _fab;
-
+	private BottomNavigationView bottomNavigationView1;
 	private WebView webview1;
 	private Vibrator vib;
 	private MediaPlayer mp;
@@ -67,41 +70,42 @@ public class MainActivity extends AppCompatActivity {
 
 
 	private void initialize(Bundle _savedInstanceState) {
+		      //  bottomNavigationView1.setSelectedItemId(R.id.nav_home);
+                webview1 = (WebView) findViewById(R.id.sc_tov_wv_tos);
+				webview1.getSettings().setJavaScriptEnabled(true);
+				webview1.getSettings().setSupportZoom(true);
+				vib = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+				pop = new AlertDialog.Builder(this);
 
-		_fab = (FloatingActionButton) findViewById(R.id._fab);
+				webview1.setWebViewClient(new WebViewClient() {
+					@Override
+					public void onPageStarted(WebView _param1, String _param2, Bitmap _param3) {
+						final String _url = _param2;
+						super.onPageStarted(_param1, _param2, _param3);
+						//progressBar.setVisibility(View.VISIBLE);
 
-		webview1 = (WebView) findViewById(R.id.sc_tov_wv_tos);
-		webview1.getSettings().setJavaScriptEnabled(true);
-		webview1.getSettings().setSupportZoom(true);
-		vib = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-		pop = new AlertDialog.Builder(this);
+					}
 
-		webview1.setWebViewClient(new WebViewClient() {
-			@Override
-			public void onPageStarted(WebView _param1, String _param2, Bitmap _param3) {
-				final String _url = _param2;
-				super.onPageStarted(_param1, _param2, _param3);
-				//progressBar.setVisibility(View.VISIBLE);
+					@Override
+					public void onPageFinished(WebView _param1, String _param2) {
+						final String _url = _param2;
+						super.onPageFinished(_param1, _param2);
+						//progressBar.setVisibility(View.INVISIBLE);
 
-			}
+					}
 
-			@Override
-			public void onPageFinished(WebView _param1, String _param2) {
-				final String _url = _param2;
-				super.onPageFinished(_param1, _param2);
-				//progressBar.setVisibility(View.INVISIBLE);
+				});
 
-			}
 
-		});
-
-		_fab.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View _view) {
-				webview1.loadUrl("https://appshizuoka.gq");
-			}
-		});
+	//	          bottomNavigationView1.setOnClickListener(new View.OnClickListener() {
+	//	          	@Override
+	//				public void onClick(View _view) {
+	//			        webview1.loadUrl("https://appshizuoka.gq");
+	//	          	}
+	//	        });
 	}
+
+
 
 	private void initializeLogic() {
 		webview1.loadUrl("https://appshizuoka.gq");
