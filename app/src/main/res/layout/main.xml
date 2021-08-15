@@ -17,23 +17,31 @@
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
 			android:baselineAligned="true" />
+
 	</LinearLayout>
 
 	<com.google.android.material.floatingactionbutton.FloatingActionButton
 		android:id="@+id/_fab"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:layout_gravity="right|bottom"
-		android:layout_margin="10dp"
-		app:layout_anchor="@+id/linearLayout"
+		app:layout_anchor="@id/bottomAppBar"
 		app:layout_anchorGravity="end|bottom"
-		app:srcCompat="@drawable/koushin"  />
+		app:srcCompat="@drawable/koushin" />
 
 	<ProgressBar
 		android:id="@+id/sc_tov_pb_progress_bar"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
 		android:layout_gravity="center" />
+
+	<com.google.android.material.bottomappbar.BottomAppBar
+		android:id="@+id/bottomAppBar"
+		style="@style/Widget.MaterialComponents.BottomAppBar.Colored"
+		android:layout_width="match_parent"
+		android:layout_height="35dp"
+		android:layout_gravity="bottom"
+		android:backgroundTint="@color/colorPrimaryDark"
+		app:fabAlignmentMode="center" />
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
