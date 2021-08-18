@@ -62,6 +62,12 @@ public class MainActivity extends AppCompatActivity {
 			super.onPageFinished(view,url);
 			progressBar.setVisibility(View.INVISIBLE);
 		}
+			//エラー時に呼ばれる
+			@Override
+			public void onReceivedError(WebView view, int errorCode,
+										String description, String url) {
+				SketchwareUtil.showMessage(getApplicationContext(), "ネットワークを確認してください");
+			}
 	});
 	}
 
