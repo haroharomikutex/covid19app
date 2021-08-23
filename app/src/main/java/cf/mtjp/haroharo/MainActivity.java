@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
 			super.onPageFinished(view,url);
 			progressBar.setVisibility(View.INVISIBLE);
 		}
-			//エラー時に呼ばれる
+			//オフライン時の処理
 			@Override
 			public void onReceivedError(WebView view, int errorCode,
 										String description, String url) {
@@ -114,11 +114,11 @@ public class MainActivity extends AppCompatActivity {
 		vib.vibrate((long) (100));
 		pop.setTitle("ようこそ");
 		pop.setIcon(R.drawable.app_icon);
-		pop.setMessage("この度は静岡県新型コロナウイルス対策アプリをダウンロード頂きありがとうございます。\nこのアプリは静岡県民の皆様に新型コロナウイルスに対する正しい知識を得て頂きたく作成いたしました。\n今後アップデートなどのアナウンスはこちらのTwitterアカウント（ https://mobile.twitter.com/Shizuoka_COVID ）より配信いたしますのでフォローの程よろしくお願い致します。\n\n==============\nこのアプリは静岡県公式のものではありません。\nバージョン1.0.0 \n");
+		pop.setMessage("この度はシズスマ！(静岡スマート情報ポータルアプリ)をダウンロード頂きありがとうございます。\nこのアプリは新型コロナウイルスによって打撃を受けた静岡県の経済活動を活性化するとともに食品ロスの削減や自然豊かな静岡県の魅力を県内外にPRするアプリです。\n今後アプリに関するアナウンスはこちらのTwitterアカウント（ https://mobile.twitter.com/Shizuoka_COVID ）より配信いたしますのでフォローの程よろしくお願い致します。\n\n==============\nバージョン1.0.0 \n");
 		pop.setPositiveButton("スタート", new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface _dialog, int _which) {
-				SketchwareUtil.showMessage(getApplicationContext(), "読み込み中...");
+				SketchwareUtil.showMessage(getApplicationContext(), "しばらくお待ちください...");
 			}
 		});
 		pop.create().show();
