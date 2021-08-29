@@ -34,7 +34,7 @@ class TutorialActivity : WelcomeActivity() {
                 .page(BasicPage(
                         R.drawable.image5,
                         "アプリについての\n簡単な紹介を致します。",
-                        "「SKIP」ボタンを押すことで\nこのチュートリアルを終了できます。\nPeopleillustrationsbyStoryset")
+                        "「SKIP」ボタンを押すことで\nこのチュートリアルを終了できます。")
                         .background(BackgroundColor(Color.GRAY)))
                 .page(BasicPage(
                         R.drawable.image3,

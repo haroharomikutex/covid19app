@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
 		webview1.loadUrl("https://appshizuoka.gq");
 		vib.vibrate((long) (100));
 		pop.setTitle("ようこそ");
-		pop.setIcon(R.drawable.app_icon);
+		pop.setIcon(R.drawable.image_10);
 		pop.setMessage("この度はシズスマ！(静岡スマート情報ポータルアプリ)をダウンロード頂きありがとうございます。\nこのアプリは新型コロナウイルスによって打撃を受けた静岡県の経済活動を活性化するとともに食品ロスの削減や自然豊かな静岡県の魅力を県内外にPRするアプリです。\n今後アプリに関するアナウンスはこちらのTwitterアカウント（ https://mobile.twitter.com/Shizuoka_COVID ）より配信いたしますのでフォローの程よろしくお願い致します。\n\n==============\nバージョン1.0.0 \n");
 		pop.setPositiveButton("スタート", new DialogInterface.OnClickListener() {
 			@Override
