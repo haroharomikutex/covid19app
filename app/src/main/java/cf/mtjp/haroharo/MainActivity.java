@@ -105,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
 			@Override
 			public void onClick(View _view) {
 				webview1.loadUrl("https://appshizuoka.gq");
-				SketchwareUtil.showMessage(getApplicationContext(), "ホームに戻っています(読み込みに時間がかかる場合があります)");
+				SketchwareUtil.showMessage(getApplicationContext(), "ホームに戻っています\n(読み込みに時間がかかる場合があります)");
 			}
 		});
 	}
