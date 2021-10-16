@@ -67,6 +67,17 @@ public class MainActivity extends AppCompatActivity {
 			public void onReceivedError(WebView view, int errorCode,
 										String description, String url) {
 				SketchwareUtil.showMessage(getApplicationContext(), "ネットワークを確認してください");
+				pop.setTitle("読み込みに失敗しました\n(サポートコード002)");
+				pop.setIcon(R.drawable.attention);
+				pop.setMessage("ネットワークの状況が悪い或いは技術的なエラーが発生しています。\n再読み込みボタンを押して再読み込みを行ってください。\n改善が見られない場合は一度端末を再起動してみてください。");
+				pop.setPositiveButton("再読み込み", new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface _dialog, int _which) {
+						webview1.reload();
+						SketchwareUtil.showMessage(getApplicationContext(), "接続中です。\nしばらくお待ちください...");
+					}
+				});
+				pop.create().show();
 			}
 	});
 	}
