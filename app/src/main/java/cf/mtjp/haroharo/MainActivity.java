@@ -77,6 +77,13 @@ public class MainActivity extends AppCompatActivity {
 						SketchwareUtil.showMessage(getApplicationContext(), "接続中です。\nしばらくお待ちください...");
 					}
 				});
+						pop.setNegativeButton("前の画面に戻る", new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface _dialog, int _which) {
+								webview1.goBack();
+								SketchwareUtil.showMessage(getApplicationContext(), "転送中です。\nしばらくお待ちください...");
+							}
+						});
 				pop.create().show();
 			}
 	});
