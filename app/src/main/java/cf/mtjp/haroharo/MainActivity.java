@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
 							@Override
 							public void onClick(DialogInterface _dialog, int _which) {
 								webview1.goBack();
-								SketchwareUtil.showMessage(getApplicationContext(), "前ページ転送中です。\nしばらくお待ちください...");
+								SketchwareUtil.showMessage(getApplicationContext(), "前ページへ転送中です。\nしばらくお待ちください...");
 							}
 						});
 				pop.setNeutralButton("ホームへ戻る", new DialogInterface.OnClickListener() {
