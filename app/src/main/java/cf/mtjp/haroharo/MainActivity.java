@@ -69,6 +69,8 @@ public class MainActivity extends AppCompatActivity {
 				SketchwareUtil.showMessage(getApplicationContext(), "ネットワークを確認してください");
 				pop.setTitle("読み込みに失敗しました\n(サポートコード002)");
 				pop.setIcon(R.drawable.attention);
+				pop.setCancelable(false);
+				pop.setInverseBackgroundForced(false);
 				pop.setMessage("ネットワークの状況が悪い或いは技術的なエラーが発生しています。\n再読み込みボタンを押して再読み込みを行ってください。\n改善が見られない場合は一度端末を再起動してみてください。");
 				pop.setPositiveButton("再読み込み", new DialogInterface.OnClickListener() {
 					@Override

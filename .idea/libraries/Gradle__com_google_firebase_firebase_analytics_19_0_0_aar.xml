@@ -1,9 +1,7 @@
 <component name="libraryTable">
   <library name="Gradle: com.google.firebase:firebase-analytics:19.0.0@aar">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/305cc85dec82fb1e8371a8b64179b4ba/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/9416790c231f1420f85ab35dcb26a17a/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/e0fc38d6ad8d07d332415cb7b27347ba/firebase-analytics-19.0.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/2292f05f3c93c9288cd328cb3acf0d80/transformed/jetified-firebase-analytics-19.0.0/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/0397e1e39f0b07fe38a12a4f5a6d8a82/jetified-firebase-analytics-19.0.0/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/0397e1e39f0b07fe38a12a4f5a6d8a82/jetified-firebase-analytics-19.0.0/AndroidManifest.xml" />
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/0397e1e39f0b07fe38a12a4f5a6d8a82/jetified-firebase-analytics-19.0.0/jars/classes.jar!/" />
