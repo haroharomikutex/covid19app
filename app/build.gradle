@@ -3,14 +3,14 @@ apply plugin: 'com.google.gms.google-services'
 
 android {
 	useLibrary 'org.apache.http.legacy'
-	compileSdkVersion 30
+	compileSdkVersion 31
 	
 	defaultConfig {
 		applicationId "cf.mtjp.haroharo"
 		minSdkVersion 19
-		targetSdkVersion 30
+		targetSdkVersion 31
 		versionCode 7
-		versionName "2021.11.03.j"
+		versionName "2021.11.28.r"
 		multiDexEnabled true
 	}
 	buildTypes {
