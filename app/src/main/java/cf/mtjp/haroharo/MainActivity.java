@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
 			@Override
 			public void onReceivedError(WebView view, int errorCode,
 										String description, String url) {
-				SketchwareUtil.showMessage(getApplicationContext(), "ネットワークを確認してください");
+				Toasty.error(getApplicationContext(), "ネットワークを確認してください", Toast.LENGTH_SHORT, true).show();
 				pop.setTitle("読み込みに失敗しました\n(サポートコード002)");
 				pop.setIcon(R.drawable.attention);
 				pop.setCancelable(false);
@@ -79,21 +79,21 @@ public class MainActivity extends AppCompatActivity {
 					@Override
 					public void onClick(DialogInterface _dialog, int _which) {
 						webview1.reload();
-						SketchwareUtil.showMessage(getApplicationContext(), "接続中です。\nしばらくお待ちください...");
+						Toasty.success(getApplicationContext(), "接続中です。\\nしばらくお待ちください...", Toast.LENGTH_SHORT, false).show();
 					}
 				});
 						pop.setNegativeButton("前の画面に戻る", new DialogInterface.OnClickListener() {
 							@Override
 							public void onClick(DialogInterface _dialog, int _which) {
 								webview1.goBack();
-								SketchwareUtil.showMessage(getApplicationContext(), "前ページへ転送中です。\nしばらくお待ちください...");
+								Toasty.success(getApplicationContext(), "前ページへ転送中です。\\nしばらくお待ちください...", Toast.LENGTH_SHORT, false).show();
 							}
 						});
 				pop.setNeutralButton("ホームへ戻る", new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface _dialog, int _which) {
 						webview1.loadUrl("https://appshizuoka.gq");
-						SketchwareUtil.showMessage(getApplicationContext(), "ホームへ転送中です。\nしばらくお待ちください...");
+						Toasty.success(getApplicationContext(), "ホームへ転送中です。\\nしばらくお待ちください...", Toast.LENGTH_SHORT, false).show();
 					}
 				});
 				pop.create().show();
@@ -135,7 +135,8 @@ public class MainActivity extends AppCompatActivity {
 			@Override
 			public void onClick(View _view) {
 				webview1.loadUrl("https://appshizuoka.gq");
-				SketchwareUtil.showMessage(getApplicationContext(), "ホームに戻っています\n(読み込みに時間がかかる場合があります)");
+				Toasty.success(getApplicationContext(), "ホームに戻っています", Toast.LENGTH_SHORT, true).show();
+				Toasty.warning(getApplicationContext(), "読み込みに時間がかかる場合があります", Toast.LENGTH_SHORT, true).show();
 			}
 		});
 	}
