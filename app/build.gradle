@@ -9,8 +9,8 @@ android {
 		applicationId "cf.mtjp.haroharo"
 		minSdkVersion 19
 		targetSdkVersion 31
-		versionCode 7
-		versionName "2021.11.28.r"
+		versionCode 8
+		versionName "2021.11.29.b"
 		multiDexEnabled true
 	}
 	buildTypes {
@@ -36,6 +36,7 @@ dependencies {
 	implementation 'com.google.firebase:firebase-messaging:22.0.0'
 	implementation 'com.stephentuso:welcome:1.4.1'
 	implementation 'com.google.firebase:firebase-inappmessaging-display'
+	implementation 'com.github.GrenderG:Toasty:1.5.2'
 
 }
 
