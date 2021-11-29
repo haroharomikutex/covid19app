@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
 	private AlertDialog.Builder pop;
 	private ProgressBar progressBar;
 	private TutorialActivity Companion;
-    private Toasty toasty;
+    private Toasty Toasty;
 
 	@Override
 	protected void onCreate(Bundle _savedInstanceState) {
@@ -149,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
 		pop.setPositiveButton("スタート", new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface _dialog, int _which) {
-
+				Toasty.info(getApplicationContext(), "しばらくお待ちください...", Toast.LENGTH_SHORT, true).show();
 			}
 		});
 		pop.create().show();
