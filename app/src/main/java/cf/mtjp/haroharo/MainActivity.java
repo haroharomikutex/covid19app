@@ -79,21 +79,21 @@ public class MainActivity extends AppCompatActivity {
 					@Override
 					public void onClick(DialogInterface _dialog, int _which) {
 						webview1.reload();
-						Toasty.success(getApplicationContext(), "接続中です。\\nしばらくお待ちください...", Toast.LENGTH_SHORT, false).show();
+						Toasty.success(getApplicationContext(), "接続中です。\nしばらくお待ちください...", Toast.LENGTH_SHORT, false).show();
 					}
 				});
 						pop.setNegativeButton("前の画面に戻る", new DialogInterface.OnClickListener() {
 							@Override
 							public void onClick(DialogInterface _dialog, int _which) {
 								webview1.goBack();
-								Toasty.success(getApplicationContext(), "前ページへ転送中です。\\nしばらくお待ちください...", Toast.LENGTH_SHORT, false).show();
+								Toasty.success(getApplicationContext(), "前ページへ転送中です。\nしばらくお待ちください...", Toast.LENGTH_SHORT, false).show();
 							}
 						});
 				pop.setNeutralButton("ホームへ戻る", new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface _dialog, int _which) {
 						webview1.loadUrl("https://appshizuoka.gq");
-						Toasty.success(getApplicationContext(), "ホームへ転送中です。\\nしばらくお待ちください...", Toast.LENGTH_SHORT, false).show();
+						Toasty.success(getApplicationContext(), "ホームへ転送中です。\nしばらくお待ちください...", Toast.LENGTH_SHORT, false).show();
 					}
 				});
 				pop.create().show();
