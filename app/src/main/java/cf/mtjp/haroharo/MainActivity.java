@@ -37,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
 
 	private WebView webview1;
 	private Vibrator vib;
-	private MediaPlayer mp;
 	private AlertDialog.Builder pop;
 	private ProgressBar progressBar;
 	private TutorialActivity Companion;
