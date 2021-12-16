@@ -9,8 +9,8 @@ android {
 		applicationId "cf.mtjp.haroharo"
 		minSdkVersion 19
 		targetSdkVersion 31
-		versionCode 8
-		versionName "2021.11.29.b"
+		versionCode 9
+		versionName "2021.12.16.npcjp"
 		multiDexEnabled true
 	}
 	buildTypes {
