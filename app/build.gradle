@@ -41,7 +41,15 @@ dependencies {
 }
 
 android {
-	compileOptions {
+	signingConfigs {
+        debug {
+            storeFile file('C:\\shizuokacovidappkey3.jks')
+            storePassword 'Kinaitoka2005@'
+            keyAlias 'Kinaitoka2005@'
+            keyPassword 'Kinaitoka2005@'
+        }
+    }
+    compileOptions {
 		sourceCompatibility JavaVersion.VERSION_1_8
 		targetCompatibility JavaVersion.VERSION_1_8
 	}
