@@ -6,6 +6,10 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/covid19app.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/covid19app.app.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/covid19app.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/covid19app.app.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/covid19app.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/covid19app.app.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mylibrary/covid19app.mylibrary.iml" filepath="$PROJECT_DIR$/.idea/modules/mylibrary/covid19app.mylibrary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mylibrary/covid19app.mylibrary.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/mylibrary/covid19app.mylibrary.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mylibrary/covid19app.mylibrary.main.iml" filepath="$PROJECT_DIR$/.idea/modules/mylibrary/covid19app.mylibrary.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mylibrary/covid19app.mylibrary.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/mylibrary/covid19app.mylibrary.unitTest.iml" />
     </modules>
   </component>
 </project>
