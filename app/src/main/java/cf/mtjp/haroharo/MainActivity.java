@@ -1,5 +1,4 @@
 package cf.mtjp.haroharo;
-
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -28,6 +27,10 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import es.dmoral.toasty.Toasty;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.SharedPreferences;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -41,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
 	private ProgressBar progressBar; // 修正された行
 	private TutorialActivity Companion;
 	private Toasty Toasty;
+	private MediaPlayer mediaPlayer;
+	private boolean isPlaySelected = false; // 選択結果を保持するフラグ
 
 	@Override
 	protected void onCreate(Bundle _savedInstanceState) {
@@ -48,11 +53,12 @@ public class MainActivity extends AppCompatActivity {
 		setTheme(R.style.AppTheme);
 		setContentView(R.layout.main);
 		animationView = findViewById(R.id.sc_tov_pb_progress_bar2);
-		progressBar = findViewById(R.id.sc_tov_pb_progress_bar); // 修正された行
+		progressBar = findViewById(R.id.sc_tov_pb_progress_bar);
 		if (progressBar != null) {
 			progressBar.setVisibility(View.INVISIBLE);
 		}
 		initialize(_savedInstanceState);
+		showPlayConfirmationDialog2();
 		initializeLogic();
 		progressBar.setVisibility(View.INVISIBLE);
 		webview1 = findViewById(R.id.sc_tov_wv_tos);
@@ -68,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
 				// 読み込みが完了したらアニメーションを非表示に
 				animationView.setVisibility(View.GONE);
 			}
+
 
 			@Override
 			public void onReceivedError(WebView view, int errorCode,
@@ -105,9 +112,55 @@ public class MainActivity extends AppCompatActivity {
 		});
 	}
 
+	private void showPlayConfirmationDialog2() {
+		// SharedPreferencesから選択結果を読み出す
+		SharedPreferences preferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+		isPlaySelected = preferences.getBoolean("isPlaySelected", false);
+
+		if (!isPlaySelected) { // isPlaySelectedがfalseの場合にのみダイアログを表示
+			AlertDialog.Builder builder = new AlertDialog.Builder(this);
+			builder.setTitle("再生確認");
+			builder.setMessage("オーディオを再生しますか？");
+			// ユーザーが選択した結果を保存
+			builder.setPositiveButton("再生する", new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialogInterface, int i) {
+					// 選択を保存（"isPlaySelected"というキーでtrueを保存）
+					SharedPreferences.Editor editor = preferences.edit();
+					editor.putBoolean("isPlaySelected", true);
+					editor.apply();
+					isPlaySelected = true; // フラグも更新
+
+					// MediaPlayerを初期化してOGGオーディオファイルを再生
+					mediaPlayer = MediaPlayer.create(MainActivity.this, R.raw.soundlogo);
+					mediaPlayer.start();
+				}
+			});
+			builder.setNegativeButton("再生しない", new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialogInterface, int i) {
+					// ユーザーが再生しないを選択した場合の処理（何もしない）
+					isPlaySelected = true; // フラグを更新し、再生を選択した場合のみtrueにする
+
+					// 選択を保存（"isPlaySelected"というキーでfalseを保存）
+					SharedPreferences.Editor editor = preferences.edit();
+					editor.putBoolean("isPlaySelected", true);
+					editor.apply();
+				}
+			});
+			AlertDialog dialog = builder.create();
+			dialog.show();
+		}
+		// それ以外の場合は何もしない
+	}
+
+
+
+
+
+
 	private void initialize(Bundle _savedInstanceState) {
 		_fab = findViewById(R.id._fab);
-
 		webview1 = findViewById(R.id.sc_tov_wv_tos);
 		webview1.getSettings().setJavaScriptEnabled(true);
 		webview1.getSettings().setSupportZoom(true);
@@ -233,4 +286,14 @@ public class MainActivity extends AppCompatActivity {
 		startActivity(intent);
 		return true;
 	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();//サウンド関係のresource開放
+		if (mediaPlayer != null) {
+			mediaPlayer.release();
+			mediaPlayer = null;
+		}
+	}
+
 }
