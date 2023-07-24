@@ -39,7 +39,7 @@ dependencies {
 	implementation 'com.stephentuso:welcome:1.4.1'
 	implementation 'com.google.firebase:firebase-inappmessaging-display'
 	implementation 'com.github.GrenderG:Toasty:1.5.2'
-	implementation 'com.airbnb.android:lottie:6.1.0'
+	implementation 'com.airbnb.android:lottie:5.2.0'
 
 }
 

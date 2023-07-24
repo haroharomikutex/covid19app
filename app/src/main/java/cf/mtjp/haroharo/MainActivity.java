@@ -21,6 +21,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -28,46 +29,50 @@ import java.util.Random;
 
 import es.dmoral.toasty.Toasty;
 
-
 public class MainActivity extends AppCompatActivity {
-
 
 	private Toolbar _toolbar;
 	private FloatingActionButton _fab;
+	private LottieAnimationView animationView;
 
 	private WebView webview1;
 	private Vibrator vib;
 	private AlertDialog.Builder pop;
-	private ProgressBar progressBar;
+	private ProgressBar progressBar; // 修正された行
 	private TutorialActivity Companion;
-    private Toasty Toasty;
+	private Toasty Toasty;
 
 	@Override
 	protected void onCreate(Bundle _savedInstanceState) {
-		setTheme(R.style.AppTheme);
 		super.onCreate(_savedInstanceState);
+		setTheme(R.style.AppTheme);
 		setContentView(R.layout.main);
-		initialize(_savedInstanceState);
-		initializeLogic();
-		TutorialActivity.Companion.showIfNeeded(MainActivity.this,_savedInstanceState);
-		progressBar = (ProgressBar) findViewById(R.id.sc_tov_pb_progress_bar);
-		progressBar.setVisibility(View.INVISIBLE);
-		webview1 = (WebView) findViewById(R.id.sc_tov_wv_tos);
-		webview1.setWebViewClient(new WebViewClient() {
-		@Override
-		public void onPageStarted(WebView view, String url, Bitmap favicon) {
-			super.onPageStarted(view, url, favicon);
-			progressBar.setVisibility(View.VISIBLE);
-		}
-		@Override
-		public void onPageFinished(WebView view, String url) {
-			super.onPageFinished(view,url);
+		animationView = findViewById(R.id.sc_tov_pb_progress_bar2);
+		progressBar = findViewById(R.id.sc_tov_pb_progress_bar); // 修正された行
+		if (progressBar != null) {
 			progressBar.setVisibility(View.INVISIBLE);
 		}
-			//オフライン時の処理
+		initialize(_savedInstanceState);
+		initializeLogic();
+		progressBar.setVisibility(View.INVISIBLE);
+		webview1 = findViewById(R.id.sc_tov_wv_tos);
+		webview1.setWebViewClient(new WebViewClient() {
+			@Override
+			public void onPageStarted(WebView view, String url, Bitmap favicon) {
+				// 読み込みが開始したらアニメーションを表示
+				animationView.setVisibility(View.VISIBLE);
+			}
+
+			@Override
+			public void onPageFinished(WebView view, String url) {
+				// 読み込みが完了したらアニメーションを非表示に
+				animationView.setVisibility(View.GONE);
+			}
+
 			@Override
 			public void onReceivedError(WebView view, int errorCode,
 										String description, String url) {
+				// オフライン時の処理
 				Toasty.error(getApplicationContext(), "ネットワークを確認してください", Toast.LENGTH_SHORT, true).show();
 				pop.setTitle("読み込みに失敗しました\n(サポートコード002)");
 				pop.setIcon(R.drawable.attention);
@@ -81,13 +86,13 @@ public class MainActivity extends AppCompatActivity {
 						Toasty.success(getApplicationContext(), "接続中です。\nしばらくお待ちください...", Toast.LENGTH_SHORT, false).show();
 					}
 				});
-						pop.setNegativeButton("前の画面に戻る", new DialogInterface.OnClickListener() {
-							@Override
-							public void onClick(DialogInterface _dialog, int _which) {
-								webview1.goBack();
-								Toasty.success(getApplicationContext(), "前ページへ転送中です。\nしばらくお待ちください...", Toast.LENGTH_SHORT, false).show();
-							}
-						});
+				pop.setNegativeButton("前の画面に戻る", new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface _dialog, int _which) {
+						webview1.goBack();
+						Toasty.success(getApplicationContext(), "前ページへ転送中です。\nしばらくお待ちください...", Toast.LENGTH_SHORT, false).show();
+					}
+				});
 				pop.setNeutralButton("ホームへ戻る", new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface _dialog, int _which) {
@@ -97,15 +102,13 @@ public class MainActivity extends AppCompatActivity {
 				});
 				pop.create().show();
 			}
-	});
+		});
 	}
 
-
 	private void initialize(Bundle _savedInstanceState) {
+		_fab = findViewById(R.id._fab);
 
-		_fab = (FloatingActionButton) findViewById(R.id._fab);
-
-		webview1 = (WebView) findViewById(R.id.sc_tov_wv_tos);
+		webview1 = findViewById(R.id.sc_tov_wv_tos);
 		webview1.getSettings().setJavaScriptEnabled(true);
 		webview1.getSettings().setSupportZoom(true);
 		vib = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
@@ -117,7 +120,6 @@ public class MainActivity extends AppCompatActivity {
 				final String _url = _param2;
 				super.onPageStarted(_param1, _param2, _param3);
 				//progressBar.setVisibility(View.VISIBLE);
-
 			}
 
 			@Override
@@ -125,7 +127,6 @@ public class MainActivity extends AppCompatActivity {
 				final String _url = _param2;
 				super.onPageFinished(_param1, _param2);
 				//progressBar.setVisibility(View.INVISIBLE);
-
 			}
 
 		});
@@ -154,9 +155,6 @@ public class MainActivity extends AppCompatActivity {
 		});
 		pop.create().show();
 	}
-
-
-
 
 	@Override
 	protected void onActivityResult(int _requestCode, int _resultCode, Intent _data) {

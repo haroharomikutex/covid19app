@@ -43,5 +43,14 @@
 		android:backgroundTint="@color/colorPrimaryDark"
 		app:fabAlignmentMode="center" />
 
+	<com.airbnb.lottie.LottieAnimationView
+		android:id="@+id/sc_tov_pb_progress_bar2"
+		android:layout_width="wrap_content"
+		android:layout_height="match_parent"
+		app:lottie_autoPlay="true"
+		app:lottie_loop="true"
+		app:lottie_rawRes="@raw/loadanime" />
+
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -15,7 +15,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
 
-
+        <!-- MainActivityの宣言 -->
         <activity android:name="cf.mtjp.haroharo.MainActivity"
             android:theme="@style/WelcomeScreenTheme"
             android:exported="true">
@@ -27,7 +27,8 @@
 
         </activity>
 
-
+        <!-- TutorialActivityの宣言 -->
+        <activity android:name="cf.mtjp.haroharo.TutorialActivity" />
 
         <uses-library
             android:name="org.apache.http.legacy"
