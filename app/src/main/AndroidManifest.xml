@@ -16,7 +16,7 @@
         android:usesCleartextTraffic="true">
 
 
-        <activity android:name=".MainActivity"
+        <activity android:name="cf.mtjp.haroharo.MainActivity"
             android:theme="@style/WelcomeScreenTheme"
             android:exported="true">
 
