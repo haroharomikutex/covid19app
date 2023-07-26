@@ -2,5 +2,4 @@
 /.gradle/
 /app/build/
 /app/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/
-/app/res/raw/hellov1.mp4/
-/app/src/main/res/raw/hello.mp4
+*.mp4
