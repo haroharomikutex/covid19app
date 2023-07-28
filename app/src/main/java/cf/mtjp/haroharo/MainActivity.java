@@ -8,7 +8,6 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.Vibrator;
 import android.util.SparseBooleanArray;
 import android.util.TypedValue;
@@ -19,25 +18,18 @@ import android.webkit.WebViewClient;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-
 import com.airbnb.lottie.LottieAnimationView;
-import com.google.android.exoplayer2.MediaItem;
-import com.google.android.exoplayer2.Player;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
 import java.util.ArrayList;
 import java.util.Random;
-
 import es.dmoral.toasty.Toasty;
-
 import android.content.SharedPreferences;
 import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.google.android.exoplayer2.ui.PlayerView;
-import cf.mtjp.haroharo.SettingsActivity;
+
 
 
 
@@ -196,6 +188,8 @@ public class MainActivity extends AppCompatActivity {
 		applyWebViewSettings(javascriptEnabled, cookieEnabled);
 	}
 
+
+
 	private void initializeLogic() {
 		webview1.loadUrl("https://appshizuoka.gq");
 		vib.vibrate((long) (100));
@@ -204,13 +198,11 @@ public class MainActivity extends AppCompatActivity {
 		pop.setMessage("【開発者からのお知らせ】\n静岡県のアプリコンテストで見事、本アプリが優秀賞を受賞しました！\n今後本格的な実用化に向けて様々な機関と連携して開発して参ります！\n==============\nこの度はシズスマ！(静岡スマート情報ポータルアプリ)をダウンロード頂きありがとうございます。\nこのアプリは静岡県の経済活動を活性化するとともに食品ロスの削減や自然豊かな静岡県の魅力を県内外にPRするアプリです。\n今後アプリに関するアナウンスはこちらのXアカウント（ https://mobile.twitter.com/shizusuma_jp ）より配信いたしますのでフォローの程よろしくお願い致します。\n\n==============\nバージョン14.0.0 \n");
 		pop.setPositiveButton("スタート", new DialogInterface.OnClickListener() {
 			@Override
-			public void onClick(DialogInterface _dialog, int _which) {
+			public void onClick(DialogInterface dialog, int which) {
 				Toasty.info(getApplicationContext(), "データベース接続立証中\nしばらくお待ちください...", Toast.LENGTH_SHORT, true).show();
 			}
 		});
-		pop.create().show();
 	}
-
 	private void initialize(Bundle _savedInstanceState) {
 		_fab = findViewById(R.id._fab);
 		webview1 = findViewById(R.id.sc_tov_wv_tos);
