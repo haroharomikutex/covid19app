@@ -34,7 +34,7 @@
 		android:id="@+id/bottomAppBar"
 		style="@style/Widget.MaterialComponents.BottomAppBar.Colored"
 		android:layout_width="match_parent"
-		android:layout_height="35dp"
+		android:layout_height="45dp"
 		android:layout_gravity="bottom"
 		android:backgroundTint="@color/colorPrimaryDark"
 		app:fabAlignmentMode="center" >
@@ -48,7 +48,7 @@
 			android:layout_gravity="end"/>
 
 
-		<!-- BottomAppBar内にMaterialButtonを追加 -->
+
 		<com.google.android.material.button.MaterialButton
 			android:id="@+id/btnTutorial"
 			android:layout_width="wrap_content"

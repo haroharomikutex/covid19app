@@ -202,6 +202,7 @@ public class MainActivity extends AppCompatActivity {
 				Toasty.info(getApplicationContext(), "データベース接続立証中\nしばらくお待ちください...", Toast.LENGTH_SHORT, true).show();
 			}
 		});
+		pop.create().show();
 	}
 	private void initialize(Bundle _savedInstanceState) {
 		_fab = findViewById(R.id._fab);
