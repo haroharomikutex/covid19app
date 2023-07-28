@@ -5,6 +5,7 @@
 	android:layout_width="match_parent"
 	android:layout_height="match_parent">
 
+
 	<LinearLayout
 		android:id="@+id/linearLayout"
 		android:layout_width="match_parent"
@@ -28,11 +29,6 @@
 		app:layout_anchorGravity="end|bottom"
 		app:srcCompat="@drawable/koushin" />
 
-	<ProgressBar
-		android:id="@+id/sc_tov_pb_progress_bar"
-		android:layout_width="wrap_content"
-		android:layout_height="match_parent"
-		android:layout_gravity="center" />
 
 	<com.google.android.material.bottomappbar.BottomAppBar
 		android:id="@+id/bottomAppBar"
@@ -41,10 +37,31 @@
 		android:layout_height="35dp"
 		android:layout_gravity="bottom"
 		android:backgroundTint="@color/colorPrimaryDark"
-		app:fabAlignmentMode="center" />
+		app:fabAlignmentMode="center" >
+
+		<com.google.android.material.button.MaterialButton
+			android:id="@+id/btnSettings"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="設定"
+			android:textColor="@android:color/white"
+			android:layout_gravity="end"/>
+
+
+		<!-- BottomAppBar内にMaterialButtonを追加 -->
+		<com.google.android.material.button.MaterialButton
+			android:id="@+id/btnTutorial"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="スタート"
+			android:textColor="@android:color/white"
+			android:layout_gravity="start"/>
+
+	</com.google.android.material.bottomappbar.BottomAppBar>
+
 
 	<com.airbnb.lottie.LottieAnimationView
-		android:id="@+id/sc_tov_pb_progress_bar2"
+		android:id="@+id/sc_tov_pb_progress_bar"
 		android:layout_width="wrap_content"
 		android:layout_height="match_parent"
 		app:lottie_autoPlay="true"

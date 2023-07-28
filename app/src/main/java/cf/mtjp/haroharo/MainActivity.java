@@ -6,11 +6,14 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Vibrator;
 import android.util.SparseBooleanArray;
 import android.util.TypedValue;
 import android.view.View;
+import android.webkit.CookieManager;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ListView;
@@ -21,47 +24,83 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.google.android.exoplayer2.MediaItem;
+import com.google.android.exoplayer2.Player;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.Random;
 
 import es.dmoral.toasty.Toasty;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
+
 import android.content.SharedPreferences;
+import com.google.android.exoplayer2.SimpleExoPlayer;
+import com.google.android.exoplayer2.ui.PlayerView;
+import cf.mtjp.haroharo.SettingsActivity;
+
+
+
+
+
+// ビューのインスタンス
+
 
 
 public class MainActivity extends AppCompatActivity {
 
+	private PlayerView playerView;
+	private SimpleExoPlayer player;
 	private Toolbar _toolbar;
 	private FloatingActionButton _fab;
 	private LottieAnimationView animationView;
-
 	private WebView webview1;
 	private Vibrator vib;
 	private AlertDialog.Builder pop;
-	private ProgressBar progressBar; // 修正された行
+	private ProgressBar progressBar;
+
 	private TutorialActivity Companion;
 	private Toasty Toasty;
 	private MediaPlayer mediaPlayer;
-	private boolean isPlaySelected = false; // 選択結果を保持するフラグ
+	private boolean isPlaySelected = false;
+	private static final int REQUEST_SETTINGS = 1;
+
+	public static final String PREFS_NAME = "MyPrefs";
+	public static final String KEY_JAVASCRIPT_ENABLED = "javascript_enabled";
+	public static final String KEY_COOKIE_ENABLED = "cookie_enabled";
 
 	@Override
 	protected void onCreate(Bundle _savedInstanceState) {
 		super.onCreate(_savedInstanceState);
 		setTheme(R.style.AppTheme);
 		setContentView(R.layout.main);
-		animationView = findViewById(R.id.sc_tov_pb_progress_bar2);
-		progressBar = findViewById(R.id.sc_tov_pb_progress_bar);
-		if (progressBar != null) {
-			progressBar.setVisibility(View.INVISIBLE);
-		}
-		initialize(_savedInstanceState);
-		showPlayConfirmationDialog2();
-		initializeLogic();
-		progressBar.setVisibility(View.INVISIBLE);
+		_fab = findViewById(R.id._fab);
 		webview1 = findViewById(R.id.sc_tov_wv_tos);
+		MaterialButton btnTutorial = findViewById(R.id.btnTutorial);
+		vib = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+		pop = new AlertDialog.Builder(this);
+		animationView = findViewById(R.id.sc_tov_pb_progress_bar);
+		initialize(_savedInstanceState);
+		loadSettings();
+		initializeLogic();
+		btnTutorial.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				Intent intent = new Intent(MainActivity.this, TutorialActivity.class);
+				startActivity(intent);
+			}
+		});
+		MaterialButton btnSettings = findViewById(R.id.btnSettings);
+		btnSettings.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				// 設定画面を表示
+				showSettings();
+			}
+		});
+
+
+
 		webview1.setWebViewClient(new WebViewClient() {
 			@Override
 			public void onPageStarted(WebView view, String url, Bitmap favicon) {
@@ -74,7 +113,6 @@ public class MainActivity extends AppCompatActivity {
 				// 読み込みが完了したらアニメーションを非表示に
 				animationView.setVisibility(View.GONE);
 			}
-
 
 			@Override
 			public void onReceivedError(WebView view, int errorCode,
@@ -109,89 +147,53 @@ public class MainActivity extends AppCompatActivity {
 				});
 				pop.create().show();
 			}
+
 		});
 	}
 
-	private void showPlayConfirmationDialog2() {
-		// SharedPreferencesから選択結果を読み出す
-		SharedPreferences preferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
-		isPlaySelected = preferences.getBoolean("isPlaySelected", false);
 
-		if (!isPlaySelected) { // isPlaySelectedがfalseの場合にのみダイアログを表示
-			AlertDialog.Builder builder = new AlertDialog.Builder(this);
-			builder.setTitle("再生確認");
-			builder.setMessage("オーディオを再生しますか？");
-			// ユーザーが選択した結果を保存
-			builder.setPositiveButton("再生する", new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialogInterface, int i) {
-					// 選択を保存（"isPlaySelected"というキーでtrueを保存）
-					SharedPreferences.Editor editor = preferences.edit();
-					editor.putBoolean("isPlaySelected", true);
-					editor.apply();
-					isPlaySelected = true; // フラグも更新
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
 
-					// MediaPlayerを初期化してOGGオーディオファイルを再生
-					mediaPlayer = MediaPlayer.create(MainActivity.this, R.raw.soundlogo);
-					mediaPlayer.start();
-				}
-			});
-			builder.setNegativeButton("再生しない", new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialogInterface, int i) {
-					// ユーザーが再生しないを選択した場合の処理（何もしない）
-					isPlaySelected = true; // フラグを更新し、再生を選択した場合のみtrueにする
-
-					// 選択を保存（"isPlaySelected"というキーでfalseを保存）
-					SharedPreferences.Editor editor = preferences.edit();
-					editor.putBoolean("isPlaySelected", true);
-					editor.apply();
-				}
-			});
-			AlertDialog dialog = builder.create();
-			dialog.show();
+		if (requestCode == REQUEST_SETTINGS) {
+			if (resultCode == RESULT_OK) {
+				boolean javascriptEnabled = data.getBooleanExtra("javascript_enabled", true);
+				boolean cookieEnabled = data.getBooleanExtra("cookie_enabled", true);
+				applyWebViewSettings(javascriptEnabled, cookieEnabled);
+			}
 		}
-		// それ以外の場合は何もしない
 	}
 
+	private void showSettings() {
+		Intent intent = new Intent(this, SettingsActivity.class);
+		startActivityForResult(intent, REQUEST_SETTINGS);
+	}
 
+	private void applyWebViewSettings(boolean javascriptEnabled, boolean cookieEnabled) {
+		webview1.getSettings().setJavaScriptEnabled(javascriptEnabled);
+		CookieManager cookieManager = CookieManager.getInstance();
+		cookieManager.setAcceptCookie(cookieEnabled);
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+			cookieManager.setAcceptThirdPartyCookies(webview1, cookieEnabled);
+		}
+		// SharedPreferencesに設定を保存
+		saveSettings(javascriptEnabled, cookieEnabled);
+	}
 
+	private void saveSettings(boolean javascriptEnabled, boolean cookieEnabled) {
+		SharedPreferences preferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+		SharedPreferences.Editor editor = preferences.edit();
+		editor.putBoolean(KEY_JAVASCRIPT_ENABLED, javascriptEnabled);
+		editor.putBoolean(KEY_COOKIE_ENABLED, cookieEnabled);
+		editor.apply();
+	}
 
-
-
-	private void initialize(Bundle _savedInstanceState) {
-		_fab = findViewById(R.id._fab);
-		webview1 = findViewById(R.id.sc_tov_wv_tos);
-		webview1.getSettings().setJavaScriptEnabled(true);
-		webview1.getSettings().setSupportZoom(true);
-		vib = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-		pop = new AlertDialog.Builder(this);
-
-		webview1.setWebViewClient(new WebViewClient() {
-			@Override
-			public void onPageStarted(WebView _param1, String _param2, Bitmap _param3) {
-				final String _url = _param2;
-				super.onPageStarted(_param1, _param2, _param3);
-				//progressBar.setVisibility(View.VISIBLE);
-			}
-
-			@Override
-			public void onPageFinished(WebView _param1, String _param2) {
-				final String _url = _param2;
-				super.onPageFinished(_param1, _param2);
-				//progressBar.setVisibility(View.INVISIBLE);
-			}
-
-		});
-
-		_fab.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View _view) {
-				webview1.loadUrl("https://appshizuoka.gq");
-				Toasty.success(getApplicationContext(), "ホームに戻っています", Toast.LENGTH_SHORT, true).show();
-				Toasty.warning(getApplicationContext(), "読み込みに時間がかかる場合があります", Toast.LENGTH_SHORT, true).show();
-			}
-		});
+	private void loadSettings() {
+		SharedPreferences preferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+		boolean javascriptEnabled = preferences.getBoolean(KEY_JAVASCRIPT_ENABLED, true);
+		boolean cookieEnabled = preferences.getBoolean(KEY_COOKIE_ENABLED, true);
+		applyWebViewSettings(javascriptEnabled, cookieEnabled);
 	}
 
 	private void initializeLogic() {
@@ -199,7 +201,7 @@ public class MainActivity extends AppCompatActivity {
 		vib.vibrate((long) (100));
 		pop.setTitle("ようこそ");
 		pop.setIcon(R.drawable.image_10);
-		pop.setMessage("【開発者からのお知らせ】\n静岡県のアプリコンテストで見事、本アプリが優秀賞を受賞しました！\n今後本格的な実用化に向けて様々な機関と連携して開発して参ります！\n==============\nこの度はシズスマ！(静岡スマート情報ポータルアプリ)をダウンロード頂きありがとうございます。\nこのアプリは新型コロナウイルスによって打撃を受けた静岡県の経済活動を活性化するとともに食品ロスの削減や自然豊かな静岡県の魅力を県内外にPRするアプリです。\n今後アプリに関するアナウンスはこちらのTwitterアカウント（ https://mobile.twitter.com/Shizuoka_COVID ）より配信いたしますのでフォローの程よろしくお願い致します。\n\n==============\nバージョン11.0.0 \n");
+		pop.setMessage("【開発者からのお知らせ】\n静岡県のアプリコンテストで見事、本アプリが優秀賞を受賞しました！\n今後本格的な実用化に向けて様々な機関と連携して開発して参ります！\n==============\nこの度はシズスマ！(静岡スマート情報ポータルアプリ)をダウンロード頂きありがとうございます。\nこのアプリは静岡県の経済活動を活性化するとともに食品ロスの削減や自然豊かな静岡県の魅力を県内外にPRするアプリです。\n今後アプリに関するアナウンスはこちらのXアカウント（ https://mobile.twitter.com/shizusuma_jp ）より配信いたしますのでフォローの程よろしくお願い致します。\n\n==============\nバージョン14.0.0 \n");
 		pop.setPositiveButton("スタート", new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface _dialog, int _which) {
@@ -209,16 +211,34 @@ public class MainActivity extends AppCompatActivity {
 		pop.create().show();
 	}
 
-	@Override
-	protected void onActivityResult(int _requestCode, int _resultCode, Intent _data) {
-		super.onActivityResult(_requestCode, _resultCode, _data);
+	private void initialize(Bundle _savedInstanceState) {
+		_fab = findViewById(R.id._fab);
+		webview1 = findViewById(R.id.sc_tov_wv_tos);
+		animationView = findViewById(R.id.sc_tov_pb_progress_bar);
+		applyWebViewSettings(true, true);
+		webview1.getSettings().setSupportZoom(true);
+		vib = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+		pop = new AlertDialog.Builder(this);
 
-		switch (_requestCode) {
 
-			default:
-				break;
+		View rootLayout = findViewById(R.id.linearLayout);
+		progressBar = rootLayout.findViewById(R.id.sc_tov_pb_progress_bar);
+		if(progressBar != null) {
+			progressBar.setVisibility(View.INVISIBLE);
 		}
+
+
+		_fab.setOnClickListener(_view -> {
+			webview1.loadUrl("https://appshizuoka.gq");
+			Toasty.success(getApplicationContext(), "ホームに戻っています", Toast.LENGTH_SHORT, true).show();
+			Toasty.warning(getApplicationContext(), "読み込みに時間がかかる場合があります", Toast.LENGTH_SHORT, true).show();
+		});
+
 	}
+
+
+
+
 
 	@Override
 	public void onBackPressed() {
@@ -294,6 +314,11 @@ public class MainActivity extends AppCompatActivity {
 			mediaPlayer.release();
 			mediaPlayer = null;
 		}
+		// プレーヤーのリソースを解放
+		if (player != null) {
+			player.release();
+		}
 	}
+
 
 }

@@ -9,8 +9,8 @@ android {
 		applicationId "cf.mtjp.haroharo"
 		minSdkVersion 19
 		targetSdkVersion 31
-		versionCode 11
-		versionName '2023.07.24.jpv2'
+		versionCode 14
+		versionName '2023.07.29.jpv1'
 		multiDexEnabled true
 	}
 	buildTypes {
@@ -40,6 +40,12 @@ dependencies {
 	implementation 'com.google.firebase:firebase-inappmessaging-display'
 	implementation 'com.github.GrenderG:Toasty:1.5.2'
 	implementation 'com.airbnb.android:lottie:5.2.0'
+	implementation 'com.google.android.exoplayer:exoplayer:2.17.0'
+	implementation 'androidx.viewpager2:viewpager2:1.0.0'
+
+
+
+
 
 }
 

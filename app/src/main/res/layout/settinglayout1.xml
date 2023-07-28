@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
+
+    <!-- タイトルバー -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        app:title="「シズスマ！」システム設定"
+        app:titleTextColor="#FFFFFF"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewJavaScript"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:text="JavaScriptを有効にする"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
+
+    <Switch
+        android:id="@+id/switchJavaScript"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBaseline_toBaselineOf="@id/textViewJavaScript"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/textViewJavaScriptDescription"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="JavaScriptを有効にすると、Webページの動的な要素や機能が利用できるようになります。一部のWebページでは必要な場合があります。"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/switchJavaScript"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp" />
+
+    <!-- アプリを再起動すると設定がONに戻る旨の追記 -->
+    <TextView
+        android:id="@+id/textViewRestartNoteJavaScript"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="※ アプリを再起動すると、設定がONに戻ります。"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewJavaScriptDescription"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp" />
+
+    <TextView
+        android:id="@+id/textViewCookie"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="Cookieを有効にする"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewRestartNoteJavaScript"
+        android:layout_marginTop="24dp" />
+
+    <Switch
+        android:id="@+id/switchCookie"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBaseline_toBaselineOf="@id/textViewCookie"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/textViewCookieDescription"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Cookieを有効にすると、Webサイトが一時的にデータを保存できるようになります。ログイン状態を保持したり、個人設定を反映させるために必要な場合があります。"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/switchCookie"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp" />
+
+    <!-- アプリを再起動すると設定がONに戻る旨の追記 -->
+    <TextView
+        android:id="@+id/textViewRestartNoteCookie"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="※ アプリを再起動すると、設定がONに戻ります。"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewCookieDescription"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp" />
+    <TextView
+        android:id="@+id/mhcore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="MHSuperCoreSystemについて"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewRestartNoteCookie"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="7mm"/>
+    <TextView
+        android:id="@+id/mhcore2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="MHSuperCoreSystemは次世代のアプリケーションベースシステムです。近い将来、一つのアプリで商品の注文や病院の予約そして予定の管理など煩わしい作業をあなたをまるで家族かのように理解したAIが代行で処理提案する日本製システムです。"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mhcore"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="5dp"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
