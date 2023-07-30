@@ -1,52 +1,16 @@
 package cf.mtjp.haroharo;
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Vibrator;
-import android.util.SparseBooleanArray;
-import android.util.TypedValue;
-import android.view.View;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
-import android.widget.ListView;
-import android.widget.ProgressBar;
-import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
-import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.exoplayer2.MediaItem;
-import com.google.android.exoplayer2.Player;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import java.util.ArrayList;
-import java.util.Random;
-
-import es.dmoral.toasty.Toasty;
-
-import android.content.SharedPreferences;
 import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.google.android.exoplayer2.ui.PlayerView;
 public class oplogo extends AppCompatActivity {
     private PlayerView playerView;
     private SimpleExoPlayer player;
-    private Toolbar _toolbar;
-    private FloatingActionButton _fab;
-    private LottieAnimationView animationView;
-    private WebView webview1;
-    private Vibrator vib;
-    private AlertDialog.Builder pop;
-    private ProgressBar progressBar; // 修正された行
-    private TutorialActivity Companion;
-    private Toasty Toasty;
-    private MediaPlayer mediaPlayer;
+
 
 
     // スプラッシュ画面の表示時間（ミリ秒単位）
