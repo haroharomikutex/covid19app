@@ -222,7 +222,7 @@ public class MainActivity extends AppCompatActivity {
 		vib.vibrate((long) (100));
 		pop.setTitle("ようこそ");
 		pop.setIcon(R.drawable.image_10);
-		pop.setMessage("【開発者からのお知らせ】\n静岡県のアプリコンテストで見事、本アプリが優秀賞を受賞しました！\n今後本格的な実用化に向けて様々な機関と連携して開発して参ります！\n==============\nこの度はシズスマ！(静岡スマート情報ポータルアプリ)をダウンロード頂きありがとうございます。\nこのアプリは静岡県の経済活動を活性化するとともに食品ロスの削減や自然豊かな静岡県の魅力を県内外にPRするアプリです。\n今後アプリに関するアナウンスはこちらのXアカウント（ https://mobile.twitter.com/shizusuma_jp ）より配信いたしますのでフォローの程よろしくお願い致します。\n\n==============\nバージョン14.0.0 \n");
+		pop.setMessage("【開発者からのお知らせ】\n静岡県のアプリコンテストで見事、本アプリが優秀賞を受賞しました！\n今後本格的な実用化に向けて様々な機関と連携して開発して参ります！\n==============\nこの度はシズスマ！(静岡スマート情報ポータルアプリ)をダウンロード頂きありがとうございます。\nこのアプリは静岡県の経済活動を活性化するとともに食品ロスの削減や自然豊かな静岡県の魅力を県内外にPRするアプリです。\n今後アプリに関するアナウンスはこちらのXアカウント（ https://mobile.twitter.com/shizusuma_jp ）より配信いたしますのでフォローの程よろしくお願い致します。\n\n==============\nバージョン15.0.0 \n");
 		pop.setPositiveButton("スタート", new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
