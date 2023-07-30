@@ -139,6 +139,51 @@
                 app:layout_constraintTop_toBottomOf="@id/textViewCookieDescription"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="4dp" />
+            <TextView
+                android:id="@+id/textNoticeSettings"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
+                android:text="MHSC緊急災害通知サービス"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/textViewRestartNoteCookie" />
+
+            <!-- Cookieの説明文 -->
+            <TextView
+                android:id="@+id/textViewNoticeMHSCDescription"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="お使いの端末は、国内最速レベルで災害情報をお届けする「緊急災害通知サービス」が利用できます。この機能を利用するには「緊急災害通知を受け取る」がONになっている必要があります。"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textNoticeSettings"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp" />
+            <TextView
+                android:id="@+id/textViewNoticeSettings2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="緊急災害通知を受け取る"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewNoticeMHSCDescription" />
+            <Button
+                android:id="@+id/switchNotification"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="通知を受け取る"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:onClick="onNotificationButtonClick"
+                app:layout_constraintTop_toBottomOf="@id/textViewNoticeSettings2"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+
 
 
             <!-- MHSuperCoreSystemについてのタイトル -->
@@ -149,7 +194,7 @@
                 android:text="MHSuperCoreSystemについて"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/textViewRestartNoteCookie"
+                app:layout_constraintTop_toBottomOf="@id/switchNotification"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="7mm" />
 

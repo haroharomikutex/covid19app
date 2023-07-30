@@ -1,25 +1,34 @@
 package cf.mtjp.haroharo;
+import android.Manifest;
 import android.app.AlertDialog;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.provider.Settings;
 import android.util.SparseBooleanArray;
 import android.util.TypedValue;
 import android.view.View;
 import android.webkit.CookieManager;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationManagerCompat;
+
 import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -55,17 +64,45 @@ public class MainActivity extends AppCompatActivity {
 	private Toasty Toasty;
 	private MediaPlayer mediaPlayer;
 	private boolean isPlaySelected = false;
-	private static final int REQUEST_SETTINGS = 1;
+	private static final int REQUEST_SETTINGS = 3;
+
 
 	public static final String PREFS_NAME = "MyPrefs";
 	public static final String KEY_JAVASCRIPT_ENABLED = "javascript_enabled";
 	public static final String KEY_COOKIE_ENABLED = "cookie_enabled";
+	SharedPreferences preferences;
+	public static final String PREF_NOTIFICATION_PERMISSION_REQUESTED = "notification_permission_requested";
+
+	private boolean notificationPermissionRequested;
+
+	private static final String PREF_SHOW_NOTIFICATION_DIALOG = "show_notification_dialog";
+	private static final int REQUEST_NOTIFICATION_PERMISSION = 123;
+	private boolean shouldShowNotificationDialog() {
+		return preferences.getBoolean(PREF_SHOW_NOTIFICATION_DIALOG, true);
+	}
+
 
 	@Override
 	protected void onCreate(Bundle _savedInstanceState) {
 		super.onCreate(_savedInstanceState);
 		setTheme(R.style.AppTheme);
 		setContentView(R.layout.main);
+		preferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+
+
+// 通知権限のチェックとダイアログ表示
+		if (!notificationPermissionRequested && Build.VERSION.SDK_INT >= 23 && !isNotificationPermissionGranted()) {
+			// 通知権限のリクエストが行われたことをSharedPreferencesに保存
+			SharedPreferences.Editor editor = preferences.edit();
+			editor.putBoolean(PREF_NOTIFICATION_PERMISSION_REQUESTED, true);
+			editor.apply();
+
+			if (shouldShowNotificationDialog()) {
+				showCustomDialog(); // <-- 修正されたメソッド名
+			}
+		}
+
+
 		_fab = findViewById(R.id._fab);
 		webview1 = findViewById(R.id.sc_tov_wv_tos);
 		MaterialButton btnTutorial = findViewById(R.id.btnTutorial);
@@ -89,6 +126,7 @@ public class MainActivity extends AppCompatActivity {
 				// 設定画面を表示
 				showSettings();
 			}
+
 		});
 
 
@@ -144,18 +182,7 @@ public class MainActivity extends AppCompatActivity {
 	}
 
 
-	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		super.onActivityResult(requestCode, resultCode, data);
 
-		if (requestCode == REQUEST_SETTINGS) {
-			if (resultCode == RESULT_OK) {
-				boolean javascriptEnabled = data.getBooleanExtra("javascript_enabled", true);
-				boolean cookieEnabled = data.getBooleanExtra("cookie_enabled", true);
-				applyWebViewSettings(javascriptEnabled, cookieEnabled);
-			}
-		}
-	}
 
 	private void showSettings() {
 		Intent intent = new Intent(this, SettingsActivity.class);
@@ -299,6 +326,84 @@ public class MainActivity extends AppCompatActivity {
 		startActivity(intent);
 		return true;
 	}
+	private boolean isNotificationPermissionGranted() {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+			// Android 8.0以上の場合はチャネルの作成を確認
+			NotificationManager notificationManager = getSystemService(NotificationManager.class);
+			if (notificationManager != null) {
+				return notificationManager.getNotificationChannel("channel_id") != null;
+			}
+		} else {
+			// Android 8.0未満の場合は通知権限のチェック
+			return NotificationManagerCompat.from(this).areNotificationsEnabled();
+		}
+		return false;
+	}
+
+// ... その他のコード ...
+
+	// ダイアログを表示すべきかどうか、ユーザーの選択を確認する
+	private void showCustomDialog() {
+		View dialogView = View.inflate(this, R.layout.checkbox_dialog, null);
+		CheckBox checkBox = dialogView.findViewById(R.id.checkbox);
+
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setView(dialogView);
+		builder.setPositiveButton("設定（利用する）", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				Intent intent = new Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS);
+				intent.putExtra(Settings.EXTRA_APP_PACKAGE, getPackageName());
+				startActivityForResult(intent, REQUEST_NOTIFICATION_PERMISSION);
+			}
+		});
+		builder.setNegativeButton("閉じる", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// Handle cancel button click if needed.
+			}
+		});
+
+		// 初期状態でチェックが入らないように設定
+		checkBox.setChecked(false);
+
+		builder.setCancelable(false);
+		AlertDialog dialog = builder.create();
+
+		checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				// Save the checkbox state in the SharedPreferences
+				SharedPreferences.Editor editor = preferences.edit();
+				editor.putBoolean(PREF_SHOW_NOTIFICATION_DIALOG, !isChecked);
+				editor.apply();
+			}
+		});
+
+		dialog.show();
+	}
+
+	// onActivityResultで通知権限リクエストの結果を受け取る
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+
+		if (requestCode == REQUEST_SETTINGS) {
+			// ... 他の処理 ...
+		} else if (requestCode == REQUEST_NOTIFICATION_PERMISSION) {
+			// 通知権限リクエストの結果を受け取る
+			if (resultCode == RESULT_OK) {
+				// 通知権限が許可された場合は保存情報を更新する
+				SharedPreferences.Editor editor = preferences.edit();
+				editor.putBoolean(PREF_SHOW_NOTIFICATION_DIALOG, false);
+				editor.apply();
+			}
+		}
+	}
+
+
+
 
 	@Override
 	protected void onDestroy() {

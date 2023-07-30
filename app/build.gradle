@@ -8,9 +8,9 @@ android {
 	defaultConfig {
 		applicationId "cf.mtjp.haroharo"
 		minSdkVersion 19
-		targetSdkVersion 31
-		versionCode 14
-		versionName '2023.07.29.jpv1'
+		targetSdk 33
+		versionCode 15
+		versionName '2023.07.30.jpv1'
 		multiDexEnabled true
 	}
 	buildTypes {
