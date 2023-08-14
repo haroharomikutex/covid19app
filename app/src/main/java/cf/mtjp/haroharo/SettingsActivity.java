@@ -36,9 +36,6 @@ public class SettingsActivity extends AppCompatActivity {
     private Button notificationButton;
     private static final int REQUEST_NOTIFICATION_PERMISSION = 123;
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,10 +45,6 @@ public class SettingsActivity extends AppCompatActivity {
         javascriptSwitch = findViewById(R.id.switchJavaScript);
         cookieSwitch = findViewById(R.id.switchCookie);
         notificationButton = findViewById(R.id.switchNotification);
-
-
-
-
 
         // スイッチが変更されたときの処理を設定
         javascriptSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
@@ -77,7 +70,6 @@ public class SettingsActivity extends AppCompatActivity {
         // 設定を保存
         saveSettings();
     }
-
 
     private void loadSettings() {
         // 以前の設定を読み込んでスイッチの状態を更新
