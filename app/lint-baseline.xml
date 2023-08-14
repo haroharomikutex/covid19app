@@ -1,0 +1,695 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<issues format="6" by="lint 8.1.0" type="baseline" client="gradle" dependencies="false" name="AGP (8.1.0)" variant="all" version="8.1.0">
+
+    <issue
+        id="OnClick"
+        message="Corresponding method handler &apos;`public void onNotificationButtonClick(android.view.View)`&apos; not found"
+        errorLine1="                android:onClick=&quot;onNotificationButtonClick&quot;"
+        errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/settinglayout1.xml"
+            line="182"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="MissingPermission"
+        message="Missing permissions required by intent BluetoothAdapter.ACTION_REQUEST_ENABLE: android.permission.BLUETOOTH_CONNECT"
+        errorLine1="        activity.startActivity(intent);"
+        errorLine2="                 ~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/cf/mtjp/haroharo/BluetoothConnect.java"
+            line="33"
+            column="18"/>
+    </issue>
+
+    <issue
+        id="MissingPermission"
+        message="Missing permissions required by BluetoothAdapter.getBondedDevices: android.permission.BLUETOOTH_CONNECT"
+        errorLine1="        Set&lt;BluetoothDevice> pairedDevices = bluetoothAdapter.getBondedDevices();"
+        errorLine2="                                             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/cf/mtjp/haroharo/BluetoothConnect.java"
+            line="41"
+            column="46"/>
+    </issue>
+
+    <issue
+        id="MissingPermission"
+        message="Missing permissions required by BluetoothDevice.getName: android.permission.BLUETOOTH_CONNECT"
+        errorLine1="                result.put(&quot;name&quot;, device.getName());"
+        errorLine2="                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/cf/mtjp/haroharo/BluetoothConnect.java"
+            line="46"
+            column="24"/>
+    </issue>
+
+    <issue
+        id="MissingPermission"
+        message="Missing permissions required by BluetoothDevice.getName: android.permission.BLUETOOTH_CONNECT"
+        errorLine1="                deviceMap.put(&quot;name&quot;, device.getName());"
+        errorLine2="                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/cf/mtjp/haroharo/BluetoothController.java"
+            line="92"
+            column="27"/>
+    </issue>
+
+    <issue
+        id="MissingPermission"
+        message="Missing permissions required by BluetoothAdapter.listenUsingRfcommWithServiceRecord: android.permission.BLUETOOTH_CONNECT"
+        errorLine1="                serverSocket = bluetoothAdapter.listenUsingRfcommWithServiceRecord(tag, uuid);"
+        errorLine2="                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/cf/mtjp/haroharo/BluetoothController.java"
+            line="172"
+            column="32"/>
+    </issue>
+
+    <issue
+        id="MissingPermission"
+        message="Missing permissions required by BluetoothDevice.createRfcommSocketToServiceRecord: android.permission.BLUETOOTH_CONNECT"
+        errorLine1="                socket = device.createRfcommSocketToServiceRecord(uuid);"
+        errorLine2="                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/cf/mtjp/haroharo/BluetoothController.java"
+            line="239"
+            column="26"/>
+    </issue>
+
+    <issue
+        id="MissingPermission"
+        message="Missing permissions required by BluetoothAdapter.cancelDiscovery: android.permission.BLUETOOTH_SCAN"
+        errorLine1="            bluetoothAdapter.cancelDiscovery();"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/cf/mtjp/haroharo/BluetoothController.java"
+            line="249"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingPermission"
+        message="Missing permissions required by BluetoothSocket.connect: android.permission.BLUETOOTH_CONNECT"
+        errorLine1="                socket.connect();"
+        errorLine2="                ~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/cf/mtjp/haroharo/BluetoothController.java"
+            line="252"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="CutPasteId"
+        message="The id `R.id.videoView` has already been looked up in this method; possible cut &amp; paste error?"
+        errorLine1="        PlayerView videoView = findViewById(R.id.videoView);"
+        errorLine2="                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/cf/mtjp/haroharo/oplogo.java"
+            line="29"
+            column="32"/>
+        <location
+            file="src/main/java/cf/mtjp/haroharo/oplogo.java"
+            line="26"
+            column="22"
+            message="First usage here"/>
+    </issue>
+
+    <issue
+        id="ExifInterface"
+        message="Avoid using `android.media.ExifInterface`; use `androidx.exifinterface.media.ExifInterface` instead"
+        errorLine1="import android.media.ExifInterface;"
+        errorLine2="       ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/cf/mtjp/haroharo/FileUtil.java"
+            line="20"
+            column="8"/>
+    </issue>
+
+    <issue
+        id="InlinedApi"
+        message="Field requires API level 26 (current min is 19): `android.provider.Settings#ACTION_APP_NOTIFICATION_SETTINGS`"
+        errorLine1="                Intent intent = new Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS);"
+        errorLine2="                                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/cf/mtjp/haroharo/MainActivity.java"
+            line="322"
+            column="44"/>
+    </issue>
+
+    <issue
+        id="InlinedApi"
+        message="Field requires API level 26 (current min is 19): `android.provider.Settings#EXTRA_APP_PACKAGE`"
+        errorLine1="                intent.putExtra(Settings.EXTRA_APP_PACKAGE, getPackageName());"
+        errorLine2="                                ~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/cf/mtjp/haroharo/MainActivity.java"
+            line="323"
+            column="33"/>
+    </issue>
+
+    <issue
+        id="MissingConstraints"
+        message="This view is not constrained vertically: at runtime it will jump to the top unless you add a vertical constraint"
+        errorLine1="    &lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;"
+        errorLine2="     ~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/checkbox_dialog.xml"
+            line="6"
+            column="6"/>
+    </issue>
+
+    <issue
+        id="OldTargetApi"
+        message="Not targeting the latest versions of Android; compatibility modes apply. Consider testing and updating this version. Consult the android.os.Build.VERSION_CODES javadoc for details."
+        errorLine1="        targetSdk 33"
+        errorLine2="        ~~~~~~~~~~~~">
+        <location
+            file="build.gradle"
+            line="12"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="SimpleDateFormat"
+        message="To get local formatting use `getDateInstance()`, `getDateTimeInstance()`, or `getTimeInstance()`, or use `new SimpleDateFormat(String template, Locale locale)` with for example `Locale.US` for ASCII dates."
+        errorLine1="        SimpleDateFormat date = new SimpleDateFormat(&quot;yyyyMMdd_HHmmss&quot;);"
+        errorLine2="                                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/cf/mtjp/haroharo/FileUtil.java"
+            line="590"
+            column="33"/>
+    </issue>
+
+    <issue
+        id="UnusedAttribute"
+        message="Attribute `backgroundTint` is only used in API level 21 and higher (current min is 19)"
+        errorLine1="        android:backgroundTint=&quot;@color/colorPrimaryDark&quot;"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/main.xml"
+            line="37"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="UnusedAttribute"
+        message="Attribute `elevation` is only used in API level 21 and higher (current min is 19)"
+        errorLine1="        android:elevation=&quot;4dp&quot;"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/settinglayout1.xml"
+            line="15"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="UseSwitchCompatOrMaterialCode"
+        message="Use `SwitchCompat` from AppCompat or `SwitchMaterial` from Material library"
+        errorLine1="    private Switch javascriptSwitch;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/cf/mtjp/haroharo/SettingsActivity.java"
+            line="34"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="UseSwitchCompatOrMaterialCode"
+        message="Use `SwitchCompat` from AppCompat or `SwitchMaterial` from Material library"
+        errorLine1="    private Switch cookieSwitch;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/cf/mtjp/haroharo/SettingsActivity.java"
+            line="35"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="UseSwitchCompatOrMaterialXml"
+        message="Use `SwitchCompat` from AppCompat or `SwitchMaterial` from Material library"
+        errorLine1="            &lt;Switch"
+        errorLine2="            ^">
+        <location
+            file="src/main/res/layout/settinglayout1.xml"
+            line="60"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UseSwitchCompatOrMaterialXml"
+        message="Use `SwitchCompat` from AppCompat or `SwitchMaterial` from Material library"
+        errorLine1="            &lt;Switch"
+        errorLine2="            ^">
+        <location
+            file="src/main/res/layout/settinglayout1.xml"
+            line="109"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="InOrMmUsage"
+        message="Avoid using &quot;`mm`&quot; as units (it does not work accurately on all devices); use &quot;`dp`&quot; instead"
+        errorLine1="                android:layout_marginTop=&quot;7mm&quot; />"
+        errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/settinglayout1.xml"
+            line="196"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="UsingOnClickInXml"
+        message="Use databinding or explicit wiring of click listener in code"
+        errorLine1="                android:onClick=&quot;onNotificationButtonClick&quot;"
+        errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/settinglayout1.xml"
+            line="182"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="BadHostnameVerifier"
+        message="`verify` always returns `true`, which could cause insecure network traffic due to trusting TLS/SSL server certificates for wrong hostnames"
+        errorLine1="                    public boolean verify(String hostname, SSLSession session) {"
+        errorLine2="                                   ~~~~~~">
+        <location
+            file="src/main/java/cf/mtjp/haroharo/RequestNetworkController.java"
+            line="79"
+            column="36"/>
+    </issue>
+
+    <issue
+        id="TrustAllX509TrustManager"
+        message="`checkClientTrusted` is empty, which could cause insecure network traffic due to trusting arbitrary TLS/SSL certificates presented by peers"
+        errorLine1="                        public void checkClientTrusted(java.security.cert.X509Certificate[] chain, String authType) throws CertificateException {"
+        errorLine2="                                    ~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/cf/mtjp/haroharo/RequestNetworkController.java"
+            line="56"
+            column="37"/>
+    </issue>
+
+    <issue
+        id="TrustAllX509TrustManager"
+        message="`checkServerTrusted` is empty, which could cause insecure network traffic due to trusting arbitrary TLS/SSL certificates presented by peers"
+        errorLine1="                        public void checkServerTrusted(java.security.cert.X509Certificate[] chain, String authType) throws CertificateException {"
+        errorLine2="                                    ~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/cf/mtjp/haroharo/RequestNetworkController.java"
+            line="60"
+            column="37"/>
+    </issue>
+
+    <issue
+        id="CustomX509TrustManager"
+        message="Implementing a custom `X509TrustManager` is error-prone and likely to be insecure. It is likely to disable certificate validation altogether, and is non-trivial to implement correctly without calling Android&apos;s default implementation."
+        errorLine1="                    new X509TrustManager() {"
+        errorLine2="                        ~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/cf/mtjp/haroharo/RequestNetworkController.java"
+            line="54"
+            column="25"/>
+    </issue>
+
+    <issue
+        id="Overdraw"
+        message="Possible overdraw: Root element paints background `#FFFFFF` with a theme that also paints a background (inferred theme is `@style/AppTheme`)"
+        errorLine1="    android:background=&quot;#FFFFFF&quot;>"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/settinglayout1.xml"
+            line="7"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.layout._drawer_main` appears to be unused"
+        errorLine1="&lt;LinearLayout"
+        errorLine2="^">
+        <location
+            file="src/main/res/layout/_drawer_main.xml"
+            line="1"
+            column="1"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.layout.activity_tutorial` appears to be unused"
+        errorLine1="&lt;androidx.constraintlayout.widget.ConstraintLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;"
+        errorLine2="^">
+        <location
+            file="src/main/res/layout/activity_tutorial.xml"
+            line="2"
+            column="1"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.image` appears to be unused">
+        <location
+            file="src/main/res/drawable-nodpi/image.png"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.launcher_screen` appears to be unused"
+        errorLine1="&lt;layer-list xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;>"
+        errorLine2="^">
+        <location
+            file="src/main/res/drawable-nodpi/launcher_screen.xml"
+            line="2"
+            column="1"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.sos110` appears to be unused">
+        <location
+            file="src/main/res/drawable-nodpi/sos110.png"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.sos119` appears to be unused">
+        <location
+            file="src/main/res/drawable-nodpi/sos119.png"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.style.AppTheme_FullScreen` appears to be unused"
+        errorLine1="    &lt;style name=&quot;AppTheme.FullScreen&quot; parent=&quot;AppTheme&quot;>"
+        errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/styles.xml"
+            line="9"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.style.AppTheme_AppBarOverlay` appears to be unused"
+        errorLine1="    &lt;style name=&quot;AppTheme.AppBarOverlay&quot; parent=&quot;ThemeOverlay.AppCompat.Dark.ActionBar&quot; />"
+        errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/styles.xml"
+            line="13"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.style.AppTheme_PopupOverlay` appears to be unused"
+        errorLine1="    &lt;style name=&quot;AppTheme.PopupOverlay&quot; parent=&quot;ThemeOverlay.AppCompat.Light&quot; />"
+        errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/styles.xml"
+            line="14"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.style.AppTheme_Launcher` appears to be unused"
+        errorLine1="    &lt;style name=&quot;AppTheme.Launcher&quot;>"
+        errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/styles.xml"
+            line="15"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="RedundantNamespace"
+        message="This namespace declaration is redundant"
+        errorLine1="    &lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;"
+        errorLine2="                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/checkbox_dialog.xml"
+            line="6"
+            column="19"/>
+    </issue>
+
+    <issue
+        id="RedundantNamespace"
+        message="This namespace declaration is redundant"
+        errorLine1="    &lt;RelativeLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/oplogo.xml"
+            line="6"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="UnusedNamespace"
+        message="Unused namespace declaration xmlns:android; already declared on the root element"
+        errorLine1="    &lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;"
+        errorLine2="                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/checkbox_dialog.xml"
+            line="6"
+            column="19"/>
+    </issue>
+
+    <issue
+        id="UnusedNamespace"
+        message="Unused namespace declaration xmlns:android; already declared on the root element"
+        errorLine1="    &lt;RelativeLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/oplogo.xml"
+            line="6"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="IconDuplicates"
+        message="The following unrelated icon files have identical contents: app_icon.png, image.png">
+        <location
+            file="src/main/res/drawable-nodpi/image.png"/>
+        <location
+            file="src/main/res/drawable-nodpi/app_icon.png"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="    &lt;com.google.android.material.floatingactionbutton.FloatingActionButton"
+        errorLine2="     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/main.xml"
+            line="23"
+            column="6"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;MHSC緊急災害通知サービス&quot;, should use `@string` resource"
+        errorLine1="            android:text=&quot;MHSC緊急災害通知サービス&quot;"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/checkbox_dialog.xml"
+            line="15"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;お使いの端末は、国内最速レベルで災害情報をお届けする「緊急災害通知サービス」が利用できます。この機能を利用するには「通知の許可」が必要です。設定しますか？&quot;, should use `@string` resource"
+        errorLine1="            android:text=&quot;お使いの端末は、国内最速レベルで災害情報をお届けする「緊急災害通知サービス」が利用できます。この機能を利用するには「通知の許可」が必要です。設定しますか？&quot; />"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/checkbox_dialog.xml"
+            line="21"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;次回以降このダイアログを表示しない&quot;, should use `@string` resource"
+        errorLine1="            android:text=&quot;次回以降このダイアログを表示しない&quot; />"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/checkbox_dialog.xml"
+            line="27"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;設定&quot;, should use `@string` resource"
+        errorLine1="            android:text=&quot;設定&quot;"
+        errorLine2="            ~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/main.xml"
+            line="44"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;スタート&quot;, should use `@string` resource"
+        errorLine1="            android:text=&quot;スタート&quot;"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/main.xml"
+            line="52"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;セキュリティとプライバシー&quot;, should use `@string` resource"
+        errorLine1="                android:text=&quot;セキュリティとプライバシー&quot;"
+        errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/settinglayout1.xml"
+            line="40"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;JavaScriptを有効にする&quot;, should use `@string` resource"
+        errorLine1="                android:text=&quot;JavaScriptを有効にする&quot;"
+        errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/settinglayout1.xml"
+            line="54"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;JavaScriptを有効にすると、Webページの動的な要素や機能が利用できるようになります。一部のWebページでは必要な場合があります。&quot;, should use `@string` resource"
+        errorLine1="                android:text=&quot;JavaScriptを有効にすると、Webページの動的な要素や機能が利用できるようになります。一部のWebページでは必要な場合があります。&quot;"
+        errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/settinglayout1.xml"
+            line="74"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;※ アプリを再起動すると、設定がONに戻ります。&quot;, should use `@string` resource"
+        errorLine1="                android:text=&quot;※ アプリを再起動すると、設定がONに戻ります。&quot;"
+        errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/settinglayout1.xml"
+            line="87"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Cookieを有効にする&quot;, should use `@string` resource"
+        errorLine1="                android:text=&quot;Cookieを有効にする&quot;"
+        errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/settinglayout1.xml"
+            line="102"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Cookieを有効にすると、Webサイトが一時的にデータを保存できるようになります。ログイン状態を保持したり、個人設定を反映させるために必要な場合があります。&quot;, should use `@string` resource"
+        errorLine1="                android:text=&quot;Cookieを有効にすると、Webサイトが一時的にデータを保存できるようになります。ログイン状態を保持したり、個人設定を反映させるために必要な場合があります。&quot;"
+        errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/settinglayout1.xml"
+            line="123"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;※ アプリを再起動すると、設定がONに戻ります。&quot;, should use `@string` resource"
+        errorLine1="                android:text=&quot;※ アプリを再起動すると、設定がONに戻ります。&quot;"
+        errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/settinglayout1.xml"
+            line="136"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;MHSC緊急災害通知サービス&quot;, should use `@string` resource"
+        errorLine1="                android:text=&quot;MHSC緊急災害通知サービス&quot;"
+        errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/settinglayout1.xml"
+            line="148"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;お使いの端末は、国内最速レベルで災害情報をお届けする「緊急災害通知サービス」が利用できます。この機能を利用するには「緊急災害通知を受け取る」がONになっている必要があります。&quot;, should use `@string` resource"
+        errorLine1="                android:text=&quot;お使いの端末は、国内最速レベルで災害情報をお届けする「緊急災害通知サービス」が利用できます。この機能を利用するには「緊急災害通知を受け取る」がONになっている必要があります。&quot;"
+        errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/settinglayout1.xml"
+            line="158"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;緊急災害通知を受け取る&quot;, should use `@string` resource"
+        errorLine1="                android:text=&quot;緊急災害通知を受け取る&quot;"
+        errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/settinglayout1.xml"
+            line="171"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;通知を受け取る&quot;, should use `@string` resource"
+        errorLine1="                android:text=&quot;通知を受け取る&quot;"
+        errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/settinglayout1.xml"
+            line="179"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;MHSuperCoreSystemについて&quot;, should use `@string` resource"
+        errorLine1="                android:text=&quot;MHSuperCoreSystemについて&quot;"
+        errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/settinglayout1.xml"
+            line="191"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;MHSuperCoreSystemは次世代のアプリケーションベースシステムです。近い将来、一つのアプリで商品の注文や病院の予約そして予定の管理など煩わしい作業をあなたをまるで家族かのように理解したAIが代行で処理提案する日本製システムです。&quot;, should use `@string` resource"
+        errorLine1="                android:text=&quot;MHSuperCoreSystemは次世代のアプリケーションベースシステムです。近い将来、一つのアプリで商品の注文や病院の予約そして予定の管理など煩わしい作業をあなたをまるで家族かのように理解したAIが代行で処理提案する日本製システムです。&quot;"
+        errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/settinglayout1.xml"
+            line="203"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="RtlEnabled"
+        message="The project references RTL attributes, but does not explicitly enable or disable RTL support with `android:supportsRtl` in the manifest">
+        <location
+            file="src/main/AndroidManifest.xml"/>
+    </issue>
+
+</issues>

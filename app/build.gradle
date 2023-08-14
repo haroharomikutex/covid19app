@@ -1,12 +1,10 @@
 plugins { 
   id 'com.android.application'
-  id 'kotlin-android'
   id 'com.google.gms.google-services'
 }
 
 android {
-    useLibrary 'org.apache.http.legacy'
-    naespace "cf.mtjp.haroharo"
+    namespace "cf.mtjp.haroharo"
     compileSdk 33
 
     defaultConfig {
@@ -17,11 +15,17 @@ android {
         multiDexEnabled true
     }
     buildTypes {
-        release {
+        debug {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.debug
         }
+        release {
+            minifyEnabled false
+            signingConfig signingConfigs.debug
+        }
+    }
+    lint {
+        baseline = file("lint-baseline.xml")
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_17
@@ -31,21 +35,19 @@ android {
 }
 
 dependencies {
-    implementation 'androidx.appcompat:appcompat:1.3.1'
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'com.google.android.material:material:1.0.0'
-    implementation 'com.github.bumptech.glide:glide:3.7.0'
-    implementation 'com.google.code.gson:gson:2.8.0'
-    implementation 'com.squareup.okhttp3:okhttp:3.9.1'
-    implementation platform('com.google.firebase:firebase-bom:29.0.0')
-    implementation 'com.google.firebase:firebase-analytics'
-    implementation "com.google.firebase:firebase-messaging:17.4.0"
-    implementation 'com.google.firebase:firebase-messaging:22.0.0'
-    implementation 'com.stephentuso:welcome:1.4.1'
-    implementation 'com.google.firebase:firebase-inappmessaging-display'
-    implementation 'com.github.GrenderG:Toasty:1.5.2'
-    implementation 'com.airbnb.android:lottie:5.2.0'
-    implementation 'com.google.android.exoplayer:exoplayer:2.17.0'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'androidx.multidex:multidex:2.0.1'
     implementation 'androidx.viewpager2:viewpager2:1.0.0'
+    implementation 'com.airbnb.android:lottie:6.1.0'
+    implementation 'com.github.bumptech.glide:glide:4.15.1'
+    implementation 'com.github.GrenderG:Toasty:1.5.2'
+    implementation 'com.google.android.exoplayer:exoplayer:2.19.0'
+    implementation 'com.google.android.material:material:1.9.0'
+    implementation 'com.google.code.gson:gson:2.10.1'
+    implementation platform('com.google.firebase:firebase-bom:32.2.2')
+    implementation 'com.google.firebase:firebase-analytics'
+    implementation 'com.google.firebase:firebase-inappmessaging-display'
+    implementation 'com.google.firebase:firebase-messaging:23.2.1'
+    implementation 'com.stephentuso:welcome:1.4.1'
+    implementation 'com.squareup.okhttp3:okhttp:3.10.0'
 }
