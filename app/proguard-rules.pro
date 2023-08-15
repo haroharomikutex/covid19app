@@ -1,0 +1,1 @@
+-keepnames class cf.mtjp.haroharo.MyFirebaseMessagingService
