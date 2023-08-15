@@ -12,7 +12,7 @@ android {
         targetSdk 33
         versionCode 16
         versionName '2023.08.08.jpv1'
-        multiDexEnabled false
+        multiDexEnabled true
     }
     buildTypes {
         debug {
@@ -38,6 +38,7 @@ android {
 
 dependencies {
     implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'androidx.multidex:multidex:2.0.1'
     implementation 'androidx.viewpager2:viewpager2:1.0.0'
     implementation 'com.airbnb.android:lottie:6.1.0'
     implementation 'com.github.bumptech.glide:glide:4.15.1'
