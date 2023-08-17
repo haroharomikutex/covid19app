@@ -32,7 +32,7 @@ public final class TutorialActivity extends WelcomeActivity {
                 .page((new BasicPage(drawable.image8, "ユーザー間の\nコミュニティ機能", "会員制コミュニティーで\n朝市等の開催情報を共有できます。\n他にも廃棄してしまう農作物やまだ使える家具など捨てる前に欲しい人がいるか確認してみましょう。"))
                         .background(new BackgroundColor(Color.GRAY)))
                 .page((new BasicPage(drawable.image9, "さぁ、はじめよう！", "まだ見ぬ静岡の顔を発見しよう！\n静岡を100倍楽しむためのアプリ\nシズスマ！\n静岡スマート情報ポータル"))
-                        .background(new BackgroundColor(Color.GRAY))).swipeToDismiss(true)
+                        .background(new BackgroundColor(Color.GRAY)))
                 .swipeToDismiss(true)
                 .build();
     }
