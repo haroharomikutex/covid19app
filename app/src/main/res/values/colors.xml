@@ -1,8 +1,8 @@
 <resources>
-	<color	name="colorPrimary">#7CB342</color>
-	<color	name="colorPrimaryDark">#438300</color>
-	<color	name="colorAccent">#689F38</color>
-	<color	name="colorControlHighlight">#AED581</color>
-	<color	name="colorControlNormal">#AED581</color>
-	<color	name="WelcomePage">#FFFFFF</color>
+    <color name="colorPrimary">#7CB342</color>
+    <color name="colorPrimaryDark">#438300</color>
+    <color name="colorAccent">#689F38</color>
+    <color name="colorControlHighlight">#AED581</color>
+    <color name="colorControlNormal">#AED581</color>
+    <color name="WelcomePage">#FFFFFF</color>
 </resources>

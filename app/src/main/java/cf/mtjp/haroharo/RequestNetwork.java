@@ -1,52 +1,49 @@
 package cf.mtjp.haroharo;
 
 import android.app.Activity;
-
 import java.util.HashMap;
 
 public class RequestNetwork {
-private HashMap<String, Object> params = new HashMap<>();
-private HashMap<String, Object> headers = new HashMap<>();
+    private HashMap<String, Object> params = new HashMap<>();
+    private HashMap<String, Object> headers = new HashMap<>();
+    private Activity activity;
+    private int requestType = 0;
 
-private Activity activity;
+    public RequestNetwork(Activity activity) {
+        this.activity = activity;
+    }
 
-private int requestType = 0;
+    public void setHeaders(HashMap<String, Object> headers) {
+        this.headers = headers;
+    }
 
-public RequestNetwork(Activity activity) {
-this.activity = activity;
-}
+    public void setParams(HashMap<String, Object> params, int requestType) {
+        this.params = params;
+        this.requestType = requestType;
+    }
 
-public void setHeaders(HashMap<String, Object> headers) {
-this.headers = headers;
-}
+    public HashMap<String, Object> getParams() {
+        return params;
+    }
 
-public void setParams(HashMap<String, Object> params, int requestType) {
-this.params = params;
-this.requestType = requestType;
-}
+    public HashMap<String, Object> getHeaders() {
+        return headers;
+    }
 
-public HashMap<String, Object> getParams() {
-return params;
-}
+    public Activity getActivity() {
+        return activity;
+    }
 
-public HashMap<String, Object> getHeaders() {
-return headers;
-}
+    public int getRequestType() {
+        return requestType;
+    }
 
-public Activity getActivity() {
-return activity;
-}
+    public void startRequestNetwork(String method, String url, String tag, RequestListener requestListener) {
+        RequestNetworkController.getInstance().execute(this, method, url, tag, requestListener);
+    }
 
-public int getRequestType() {
-return requestType;
-}
-
-public void startRequestNetwork(String method, String url, String tag, RequestListener requestListener) {
-RequestNetworkController.getInstance().execute(this, method, url, tag, requestListener);
-}
-
-public interface RequestListener {
-public void onResponse(String tag, String response);
-public void onErrorResponse(String tag, String message);
-}
+    public interface RequestListener {
+        public void onResponse(String tag, String response);
+        public void onErrorResponse(String tag, String message);
+    }
 }

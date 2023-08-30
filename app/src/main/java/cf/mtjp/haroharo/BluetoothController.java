@@ -11,344 +11,334 @@ import java.util.HashMap;
 import java.util.UUID;
 
 public class BluetoothController {
-public static final String STATE_NONE       = "none";
-public static final String STATE_LISTEN     = "listen";
-public static final String STATE_CONNECTING = "connecting";
-public static final String STATE_CONNECTED  = "connected";
+    public static final String STATE_NONE       = "none";
+    public static final String STATE_LISTEN     = "listen";
+    public static final String STATE_CONNECTING = "connecting";
+    public static final String STATE_CONNECTED  = "connected";
 
-private AcceptThread acceptThread;
-private ConnectThread connectThread;
-private ConnectedThread connectedThread;
+    private AcceptThread acceptThread;
+    private ConnectThread connectThread;
+    private ConnectedThread connectedThread;
+    private String state = STATE_NONE;
+    private static BluetoothController instance;
 
-private String state = STATE_NONE;
+    public static synchronized BluetoothController getInstance() {
+        if(instance == null) {
+            instance = new BluetoothController();
+        }
+        return instance;
+    }
 
-private static BluetoothController instance;
+    public synchronized void start(BluetoothConnect bluetoothConnect, BluetoothConnect.BluetoothConnectionListener listener, String tag, UUID uuid, BluetoothAdapter bluetoothAdapter) {
+        if (connectThread != null) {
+            connectThread.cancel();
+            connectThread = null;
+        }
 
-public static synchronized BluetoothController getInstance() {
-if(instance == null) {
-instance = new BluetoothController();
-}
+        if (connectedThread != null) {
+            connectedThread.cancel();
+            connectedThread = null;
+        }
 
-return instance;
-}
+        if (acceptThread != null) {
+            acceptThread.cancel();
+            acceptThread = null;
+        }
 
-public synchronized void start(BluetoothConnect bluetoothConnect, BluetoothConnect.BluetoothConnectionListener listener, String tag, UUID uuid, BluetoothAdapter bluetoothAdapter) {
-if (connectThread != null) {
-connectThread.cancel();
-connectThread = null;
-}
+        acceptThread = new AcceptThread(bluetoothConnect, listener, tag, uuid, bluetoothAdapter);
+        acceptThread.start();
+    }
 
-if (connectedThread != null) {
-connectedThread.cancel();
-connectedThread = null;
-}
+    public synchronized void connect(BluetoothDevice device, BluetoothConnect bluetoothConnect, BluetoothConnect.BluetoothConnectionListener listener, String tag, UUID uuid, BluetoothAdapter bluetoothAdapter) {
+        if (state.equals(STATE_CONNECTING)) {
+            if (connectThread != null) {
+                connectThread.cancel();
+                connectThread = null;
+            }
+        }
 
-if (acceptThread != null) {
-acceptThread.cancel();
-acceptThread = null;
-}
+        if (connectedThread != null) {
+            connectedThread.cancel();
+            connectedThread = null;
+        }
 
-acceptThread = new AcceptThread(bluetoothConnect, listener, tag, uuid, bluetoothAdapter);
-acceptThread.start();}
+        connectThread = new ConnectThread(device, bluetoothConnect, listener, tag, uuid, bluetoothAdapter);
+        connectThread.start();
+    }
 
-public synchronized void connect(BluetoothDevice device, BluetoothConnect bluetoothConnect, BluetoothConnect.BluetoothConnectionListener listener, String tag, UUID uuid, BluetoothAdapter bluetoothAdapter) {
-if (state.equals(STATE_CONNECTING)) {
-if (connectThread != null) {
-connectThread.cancel();
-connectThread = null;
-}
-}
+    public synchronized void connected(BluetoothSocket socket, final BluetoothDevice device, BluetoothConnect bluetoothConnect, final BluetoothConnect.BluetoothConnectionListener listener, final String tag) {
+        if (connectThread != null) {
+            connectThread.cancel();
+            connectThread = null;
+        }
 
-if (connectedThread != null) {
-connectedThread.cancel();
-connectedThread = null;
-}
+        if (connectedThread != null) {
+            connectedThread.cancel();
+            connectedThread = null;
+        }
 
-connectThread = new ConnectThread(device, bluetoothConnect, listener, tag, uuid, bluetoothAdapter);
-connectThread.start();
-}
+        if (acceptThread != null) {
+            acceptThread.cancel();
+            acceptThread = null;
+        }
 
-public synchronized void connected(BluetoothSocket socket, final BluetoothDevice device, BluetoothConnect bluetoothConnect, final BluetoothConnect.BluetoothConnectionListener listener, final String tag) {
-if (connectThread != null) {
-connectThread.cancel();
-connectThread = null;
-}
+        connectedThread = new ConnectedThread(socket, bluetoothConnect, listener, tag);
+        connectedThread.start();
 
-if (connectedThread != null) {
-connectedThread.cancel();
-connectedThread = null;
-}
+        bluetoothConnect.getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                HashMap<String, Object> deviceMap = new HashMap<>();
+                deviceMap.put("name", device.getName());
+                deviceMap.put("address", device.getAddress());
+                listener.onConnected(tag, deviceMap);
+            }
+        });
+    }
 
-if (acceptThread != null) {
-acceptThread.cancel();
-acceptThread = null;
-}
+    public synchronized void stop(BluetoothConnect bluetoothConnect, final BluetoothConnect.BluetoothConnectionListener listener, final String tag) {
+        if (connectThread != null) {
+            connectThread.cancel();
+            connectThread = null;
+        }
 
-connectedThread = new ConnectedThread(socket, bluetoothConnect, listener, tag);
-connectedThread.start();
+        if (connectedThread != null) {
+            connectedThread.cancel();
+            connectedThread = null;
+        }
 
-bluetoothConnect.getActivity().runOnUiThread(new Runnable() {
-@Override
-public void run() {
-HashMap<String, Object> deviceMap = new HashMap<>();
-deviceMap.put("name", device.getName());
-deviceMap.put("address", device.getAddress());
+        if (acceptThread != null) {
+            acceptThread.cancel();
+            acceptThread = null;
+        }
 
-listener.onConnected(tag, deviceMap);
-}
-});
-}
+        state = STATE_NONE;
 
-public synchronized void stop(BluetoothConnect bluetoothConnect, final BluetoothConnect.BluetoothConnectionListener listener, final String tag) {
-if (connectThread != null) {
-connectThread.cancel();
-connectThread = null;
-}
+        bluetoothConnect.getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                listener.onConnectionStopped(tag);
+            }
+        });
+    }
 
-if (connectedThread != null) {
-connectedThread.cancel();
-connectedThread = null;
-}
+    public void write(byte[] out) {
+        ConnectedThread r;
+        synchronized (this) {
+            if (!state.equals(STATE_CONNECTED)) return;
+            r = connectedThread;
+        }
+        r.write(out);
+    }
 
-if (acceptThread != null) {
-acceptThread.cancel();
-acceptThread = null;
-}
+    public void connectionFailed(BluetoothConnect bluetoothConnect, final BluetoothConnect.BluetoothConnectionListener listener, final String tag, final String message) {
+        state = STATE_NONE;
 
-state = STATE_NONE;
+        bluetoothConnect.getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                listener.onConnectionError(tag, state, message);
+            }
+        });
+    }
 
-bluetoothConnect.getActivity().runOnUiThread(new Runnable() {
-@Override
-public void run() {
-listener.onConnectionStopped(tag);
-}
-});
-}
+    public void connectionLost(BluetoothConnect bluetoothConnect, final BluetoothConnect.BluetoothConnectionListener listener, final String tag) {
+        state = STATE_NONE;
 
-public void write(byte[] out) {
-ConnectedThread r;
+        bluetoothConnect.getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                listener.onConnectionError(tag, state, "Bluetooth connection is disconnected");
+            }
+        });
+    }
 
-synchronized (this) {
-if (!state.equals(STATE_CONNECTED)) return;
-r = connectedThread;
-}
+    public String getState() {
+        return state;
+    }
 
-r.write(out);
-}
+    private class AcceptThread extends Thread {
+        private BluetoothServerSocket serverSocket;
+        private BluetoothConnect bluetoothConnect;
+        private BluetoothConnect.BluetoothConnectionListener listener;
+        private String tag;
 
-public void connectionFailed(BluetoothConnect bluetoothConnect, final BluetoothConnect.BluetoothConnectionListener listener, final String tag, final String message) {
-state = STATE_NONE;
+        public AcceptThread(BluetoothConnect bluetoothConnect, BluetoothConnect.BluetoothConnectionListener listener, String tag, UUID uuid, BluetoothAdapter bluetoothAdapter) {
+            this.bluetoothConnect = bluetoothConnect;
+            this.listener = listener;
+            this.tag = tag;
 
-bluetoothConnect.getActivity().runOnUiThread(new Runnable() {
-@Override
-public void run() {
-listener.onConnectionError(tag, state, message);
-}
-});
-}
+            try {
+                serverSocket = bluetoothAdapter.listenUsingRfcommWithServiceRecord(tag, uuid);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
-public void connectionLost(BluetoothConnect bluetoothConnect, final BluetoothConnect.BluetoothConnectionListener listener, final String tag) {
-state = STATE_NONE;
+            state = STATE_LISTEN;
+        }
 
-bluetoothConnect.getActivity().runOnUiThread(new Runnable() {
-@Override
-public void run() {
-listener.onConnectionError(tag, state, "Bluetooth connection is disconnected");
-}
-});
-}
+        @Override
+        public void run() {
+            BluetoothSocket bluetoothSocket;
 
-public String getState() {
-return state;
-}
+            while (!state.equals(STATE_CONNECTED)) {
+                try {
+                    bluetoothSocket = serverSocket.accept();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    break;
+                }
 
-private class AcceptThread extends Thread {
-private BluetoothServerSocket serverSocket;
+                if (bluetoothSocket != null) {
+                    synchronized (BluetoothController.this) {
+                        switch (state) {
+                            case STATE_LISTEN:
+                            case STATE_CONNECTING:
+                                connected(bluetoothSocket, bluetoothSocket.getRemoteDevice(), bluetoothConnect, listener, tag);
+                                break;
+                            case STATE_NONE:
+                            case STATE_CONNECTED:
+                                try {
+                                    bluetoothSocket.close();
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                                break;
+                        }
+                    }
+                }
+            }
+        }
 
-private BluetoothConnect bluetoothConnect;
-private BluetoothConnect.BluetoothConnectionListener listener;
-private String tag;
+        public void cancel() {
+            try {
+                serverSocket.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
 
-public AcceptThread(BluetoothConnect bluetoothConnect, BluetoothConnect.BluetoothConnectionListener listener, String tag, UUID uuid, BluetoothAdapter bluetoothAdapter) {
-this.bluetoothConnect = bluetoothConnect;
-this.listener = listener;
-this.tag = tag;
+    }
 
-try {
-serverSocket = bluetoothAdapter.listenUsingRfcommWithServiceRecord(tag, uuid);
-} catch (Exception e) {
-e.printStackTrace();
-}
+    private class ConnectThread extends Thread {
+        private BluetoothDevice device;
+        private BluetoothSocket socket;
+        private BluetoothConnect bluetoothConnect;
+        private BluetoothConnect.BluetoothConnectionListener listener;
+        private String tag;
+        private BluetoothAdapter bluetoothAdapter;
 
-state = STATE_LISTEN;
-}
+        public ConnectThread(BluetoothDevice device, BluetoothConnect bluetoothConnect, BluetoothConnect.BluetoothConnectionListener listener, String tag, UUID uuid, BluetoothAdapter bluetoothAdapter) {
+            this.device = device;
+            this.bluetoothConnect = bluetoothConnect;
+            this.listener = listener;
+            this.tag = tag;
+            this.bluetoothAdapter = bluetoothAdapter;
 
-@Override
-public void run() {
-BluetoothSocket bluetoothSocket;
+            try {
+                socket = device.createRfcommSocketToServiceRecord(uuid);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
-while (!state.equals(STATE_CONNECTED)) {
-try {
-bluetoothSocket = serverSocket.accept();
-} catch (Exception e) {
-e.printStackTrace();
-break;
-}
+           state = STATE_CONNECTING;
+        }
 
-if (bluetoothSocket != null) {
-synchronized (BluetoothController.this) {
-switch (state) {
-case STATE_LISTEN:
-case STATE_CONNECTING:
-connected(bluetoothSocket, bluetoothSocket.getRemoteDevice(), bluetoothConnect, listener, tag);
-break;
-case STATE_NONE:
-case STATE_CONNECTED:
-try {
-bluetoothSocket.close();
-} catch (Exception e) {
-e.printStackTrace();
-}
-break;
-}
-}
-}
-}
-}
+        @Override
+        public void run() {
+            bluetoothAdapter.cancelDiscovery();
 
-public void cancel() {
-try {
-serverSocket.close();
-} catch (Exception e) {
-e.printStackTrace();
-}
-}
-}
+            try {
+                socket.connect();
+            } catch (Exception e) {
+                try {
+                    socket.close();
+                } catch (Exception e2) {
+                    e2.printStackTrace();
+                }
+                connectionFailed(bluetoothConnect, listener, tag, e.getMessage());
+                return;
+            }
 
-private class ConnectThread extends Thread {
-private BluetoothDevice device;
-private BluetoothSocket socket;
+            synchronized (BluetoothController.this) {
+                connectThread = null;
+            }
 
-private BluetoothConnect bluetoothConnect;
-private BluetoothConnect.BluetoothConnectionListener listener;
-private String tag;
-private BluetoothAdapter bluetoothAdapter;
+            connected(socket, device, bluetoothConnect, listener, tag);
+        }
 
-public ConnectThread(BluetoothDevice device, BluetoothConnect bluetoothConnect, BluetoothConnect.BluetoothConnectionListener listener, String tag, UUID uuid, BluetoothAdapter bluetoothAdapter) {
-this.device = device;
-this.bluetoothConnect = bluetoothConnect;
-this.listener = listener;
-this.tag = tag;
-this.bluetoothAdapter = bluetoothAdapter;
+        public void cancel() {
+            try {
+                socket.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
-try {
-socket = device.createRfcommSocketToServiceRecord(uuid);
-} catch (Exception e) {
-e.printStackTrace();
-}
+    private class ConnectedThread extends Thread {
+        private BluetoothSocket socket;
+        private InputStream inputStream;
+        private OutputStream outputStream;
+        private BluetoothConnect bluetoothConnect;
+        private BluetoothConnect.BluetoothConnectionListener listener;
+        private String tag;
 
-state = STATE_CONNECTING;
-}
+        public ConnectedThread(BluetoothSocket socket, BluetoothConnect bluetoothConnect, BluetoothConnect.BluetoothConnectionListener listener, String tag) {
+            this.bluetoothConnect = bluetoothConnect;
+            this.listener = listener;
+            this.tag = tag;
+            this.socket = socket;
 
-@Override
-public void run() {
-bluetoothAdapter.cancelDiscovery();
+            try {
+                inputStream = socket.getInputStream();
+                outputStream = socket.getOutputStream();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
-try {
-socket.connect();
-} catch (Exception e) {
-try {
-socket.close();
-} catch (Exception e2) {
-e2.printStackTrace();
-}
-connectionFailed(bluetoothConnect, listener, tag, e.getMessage());
-return;
-}
+            state = STATE_CONNECTED;
+        }
 
-synchronized (BluetoothController.this) {
-connectThread = null;
-}
+        public void run() {
+            while (state.equals(STATE_CONNECTED)) {
+                try {
+                    final byte[] buffer = new byte[1024];
+                    final int bytes = inputStream.read(buffer);
+                    bluetoothConnect.getActivity().runOnUiThread(new Runnable() {
+                       @Override
+                       public void run() {
+                           listener.onDataReceived(tag, buffer, bytes);
+                       }
+                    });
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    connectionLost(bluetoothConnect, listener, tag);
+                    break;
+                }
+            }
+        }
 
-connected(socket, device, bluetoothConnect, listener, tag);
-}
+        public void write(final byte[] buffer) {
+            try {
+                outputStream.write(buffer);
+                bluetoothConnect.getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        listener.onDataSent(tag, buffer);
+                    }
+                });
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
 
-public void cancel() {
-try {
-socket.close();
-} catch (Exception e) {
-e.printStackTrace();
-}
-}
-}
-
-private class ConnectedThread extends Thread {
-private BluetoothSocket socket;
-private InputStream inputStream;
-private OutputStream outputStream;
-
-private BluetoothConnect bluetoothConnect;
-private BluetoothConnect.BluetoothConnectionListener listener;
-private String tag;
-
-public ConnectedThread(BluetoothSocket socket, BluetoothConnect bluetoothConnect, BluetoothConnect.BluetoothConnectionListener listener, String tag) {
-this.bluetoothConnect = bluetoothConnect;
-this.listener = listener;
-this.tag = tag;
-
-this.socket = socket;
-
-try {
-inputStream = socket.getInputStream();
-outputStream = socket.getOutputStream();
-} catch (Exception e) {
-e.printStackTrace();
-}
-
-state = STATE_CONNECTED;
-}
-
-public void run() {
-while (state.equals(STATE_CONNECTED)) {
-try {
-final byte[] buffer = new byte[1024];
-final int bytes = inputStream.read(buffer);
-
-bluetoothConnect.getActivity().runOnUiThread(new Runnable() {
-@Override
-public void run() {
-listener.onDataReceived(tag, buffer, bytes);
-}
-});
-} catch (Exception e) {
-e.printStackTrace();
-connectionLost(bluetoothConnect, listener, tag);
-break;
-}
-}
-}
-
-public void write(final byte[] buffer) {
-try {
-outputStream.write(buffer);
-
-bluetoothConnect.getActivity().runOnUiThread(new Runnable() {
-@Override
-public void run() {
-listener.onDataSent(tag, buffer);
-}
-});
-} catch (Exception e) {
-e.printStackTrace();
-}
-}
-
-public void cancel() {
-try {
-socket.close();
-} catch (Exception e) {
-e.printStackTrace();
-}
-}
-}
+        public void cancel() {
+            try {
+                socket.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }

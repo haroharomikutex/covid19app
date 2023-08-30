@@ -1,5 +1,11 @@
-# Project exclude paths
+# Gradle
 /.gradle/
+# Android SDK
+/local.properties
+# IntelliJ
+/.idea/
+# Gradle Build
 /app/build/
-/app/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/
-*.mp4
+# Android Studio Signing APK
+/app/debug/
+/app/release/
