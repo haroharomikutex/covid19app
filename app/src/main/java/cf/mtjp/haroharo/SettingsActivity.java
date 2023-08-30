@@ -40,6 +40,14 @@ public class SettingsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settinglayout1);
+        Button btnBack = findViewById(R.id.btnBack);
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // アクティビティを終了して前の画面に戻る
+                finish();
+            }
+        });
 
         // レイアウトからスイッチを取得
         javascriptSwitch = findViewById(R.id.switchJavaScript);
@@ -131,4 +139,5 @@ public class SettingsActivity extends AppCompatActivity {
                 .apply();
 
     }
+
 }

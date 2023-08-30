@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="16dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
         <TextView
             android:layout_width="wrap_content"
@@ -18,7 +23,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="お使いの端末は、国内最速レベルで災害情報をお届けする「緊急災害通知サービス」が利用できます。この機能を利用するには「通知の許可」が必要です。設定しますか？" />
+            android:text="お使いの端末は、国内最速レベルで災害情報をお届けする「緊急災害通知サービス」が利用できます。この機能を利用するには「通知の許可」が必要です。設定しますか？"
+            android:layout_marginTop="8dp" />
 
         <CheckBox
             android:id="@+id/checkbox"
@@ -26,6 +32,8 @@
             android:layout_height="wrap_content"
             android:text="次回以降このダイアログを表示しない" />
 
+
     </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

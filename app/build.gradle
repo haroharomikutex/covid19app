@@ -1,6 +1,6 @@
-plugins { 
-  id 'com.android.application'
-  id 'com.google.gms.google-services'
+plugins {
+    id 'com.android.application'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -8,18 +8,20 @@ android {
     compileSdk 33
 
     defaultConfig {
-        minSdk 19
+        minSdk 21
         targetSdk 33
-        versionCode 16
-        versionName '2023.08.08.jpv1'
+        versionCode 17
+        versionName '2023.08.30.jpv1'
         multiDexEnabled true
     }
     buildTypes {
         debug {
+            debuggable false
             minifyEnabled false
             signingConfig signingConfigs.debug
         }
         release {
+            debuggable false
             minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -33,7 +35,6 @@ android {
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
     }
-
 }
 
 dependencies {
@@ -46,10 +47,12 @@ dependencies {
     implementation 'com.google.android.exoplayer:exoplayer:2.19.0'
     implementation 'com.google.android.material:material:1.9.0'
     implementation 'com.google.code.gson:gson:2.10.1'
-    implementation platform('com.google.firebase:firebase-bom:32.2.2')
+    implementation platform('com.google.firebase:firebase-bom:32.2.3')
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.google.firebase:firebase-inappmessaging-display'
     implementation 'com.google.firebase:firebase-messaging:23.2.1'
     implementation 'com.stephentuso:welcome:1.4.1'
     implementation 'com.squareup.okhttp3:okhttp:3.10.0'
 }
+
+apply plugin: 'com.google.gms.google-services'

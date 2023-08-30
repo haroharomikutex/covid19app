@@ -4,14 +4,14 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="colorControlHighlight">@color/colorControlHighlight</item>
-         <item name="colorControlNormal">@color/colorControlNormal</item>
+        <item name="colorControlNormal">@color/colorControlNormal</item>
     </style>
     <style name="AppTheme.FullScreen" parent="AppTheme">
         <item name="android:windowFullscreen">false</item>
         <item name="android:windowContentOverlay">@null</item>
     </style>
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
     <style name="AppTheme.Launcher">
         <item name="android:windowBackground">@drawable/launcher_screen</item>
     </style>
