@@ -32,8 +32,6 @@
             android:layout_height="wrap_content"
             android:text="次回以降このダイアログを表示しない" />
 
-
     </LinearLayout>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

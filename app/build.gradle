@@ -25,7 +25,6 @@ android {
             minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.debug
         }
     }
     lintOptions {
@@ -54,5 +53,3 @@ dependencies {
     implementation 'com.stephentuso:welcome:1.4.1'
     implementation 'com.squareup.okhttp3:okhttp:3.10.0'
 }
-
-apply plugin: 'com.google.gms.google-services'
