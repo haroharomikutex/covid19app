@@ -12,9 +12,7 @@ import com.stephentuso.welcome.WelcomeConfiguration;
 import com.stephentuso.welcome.WelcomeHelper;
 public final class TutorialActivity extends WelcomeActivity {
 
-    /**
-     * 表示するチュートリアル画面を定義する
-     */
+
     protected WelcomeConfiguration configuration() {
         return new WelcomeConfiguration.Builder(this)
                 .defaultBackgroundColor(new BackgroundColor(Color.GRAY))

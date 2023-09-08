@@ -14,12 +14,13 @@
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
         android:elevation="4dp"
-        app:title="「シズスマ！」システム設定"
+        app:title="「シズスマ！」システムメニュー"
         app:titleTextColor="#FFFFFF"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <!-- 設定関連のビューを追加 -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -31,17 +32,39 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <!-- ボタンをタップして表示するビュー -->
+            <Button
+                android:id="@+id/showSettingsButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="設定/セキュリティとプライバシー"
+                android:layout_marginTop="0dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:onClick="onShowSettingsButtonClick" />
+
+            <!-- 以下、設定関連のビューグループ -->
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/settingsGroup"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:visibility="gone"
+                app:constraint_referenced_ids="textViewWebviewSettings, textViewJavaScript, switchJavaScript, textViewJavaScriptDescription, textViewRestartNoteJavaScript, textViewCookie, switchCookie, textViewCookieDescription, textViewRestartNoteCookie, textNoticeSettings, textViewNoticeMHSCDescription, textViewNoticeSettings2, switchNotification, mhcore, mhcore2, btnBack"
+                app:layout_constraintTop_toBottomOf="@id/showSettingsButton" />
+
+            <!-- 以下、設定関連のビューは settingsGroup 内に配置 -->
+
             <!-- 「設定」のタイトル -->
             <TextView
                 android:id="@+id/textViewWebviewSettings"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="8dp"
                 android:text="セキュリティとプライバシー"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@id/showSettingsButton" />
 
             <!-- 以下、JavaScriptの設定項目 -->
 
@@ -140,6 +163,8 @@
                 app:layout_constraintTop_toBottomOf="@id/textViewCookieDescription"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="4dp" />
+
+            <!-- 通知関連のビュー -->
             <TextView
                 android:id="@+id/textNoticeSettings"
                 android:layout_width="wrap_content"
@@ -163,6 +188,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp" />
+
+            <!-- 通知設定のタイトル -->
             <TextView
                 android:id="@+id/textViewNoticeSettings2"
                 android:layout_width="wrap_content"
@@ -173,6 +200,8 @@
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/textViewNoticeMHSCDescription" />
+
+            <!-- 通知のボタン -->
             <Button
                 android:id="@+id/switchNotification"
                 android:layout_width="wrap_content"
@@ -182,8 +211,8 @@
                 android:layout_marginEnd="16dp"
                 android:onClick="onNotificationButtonClick"
                 app:layout_constraintTop_toBottomOf="@id/textViewNoticeSettings2"
-                app:layout_constraintEnd_toEndOf="parent"
-                tools:ignore="UsingOnClickInXml" />
+                app:layout_constraintEnd_toEndOf="parent" />
+
 
             <!-- MHSuperCoreSystemについてのタイトル -->
             <TextView
@@ -209,6 +238,7 @@
                 app:layout_constraintTop_toBottomOf="@id/mhcore"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="5dp" />
+
             <Button
                 android:id="@+id/btnBack"
                 android:layout_width="wrap_content"
@@ -219,10 +249,6 @@
                 app:layout_constraintTop_toBottomOf="@id/mhcore2"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginEnd="16dp" />
-
-
-
-
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
