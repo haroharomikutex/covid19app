@@ -1,9 +1,11 @@
 package cf.mtjp.haroharo;
 
 import android.app.AlertDialog;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -13,15 +15,20 @@ import android.widget.Button;
 import android.widget.Switch;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.Group;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
+import androidx.constraintlayout.widget.Group;
 
 public class SettingsActivity extends AppCompatActivity {
     private Switch javascriptSwitch;
     private Switch cookieSwitch;
     private Button notificationButton;
+
+    private Button notificationtest;
     private Group settingsGroup;
     private static final int REQUEST_NOTIFICATION_PERMISSION = 123;
+    public static final String CHANNEL_ID = "111"; // 通知チャネルID
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,19 +40,11 @@ public class SettingsActivity extends AppCompatActivity {
         cookieSwitch = findViewById(R.id.switchCookie);
         notificationButton = findViewById(R.id.switchNotification); // 通知のボタンに変更
         settingsGroup = findViewById(R.id.settingsGroup);
+        notificationtest = findViewById(R.id.testNotificationReceiveButton);
 
         // スイッチが変更されたときの処理を設定
         javascriptSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
             cookieSwitch.setEnabled(isChecked);
-        });
-
-        // 通知ボタンがクリックされたときの処理を設定
-        notificationButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // 通知ボタンがクリックされたときに通知許可を確認するダイアログを表示
-                showNotificationPermissionDialog();
-            }
         });
 
         Button showSettingsButton = findViewById(R.id.showSettingsButton);
@@ -70,13 +69,38 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
+        // 通知関連のチャネルを作成
+        createNotificationChannel();
         // 設定の読み込み
         loadSettings();
+
+        // 通知ボタンがクリックされたときの処理を設定
+        notificationButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showNotificationPermissionDialog();
+            }
+        });
+
+
+        notificationtest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 通知のパーミッションが許可されているかチェック
+                if (!isNotificationPermissionGranted()) {
+                    // パーミッションが許可されていない場合、リクエストダイアログを表示
+                    showNotificationPermissionDialog();
+                } else {
+                    // パーミッションが許可されている場合の処理
+                    sendTestNotification();
+                }
+            }
+        });
     }
 
     // 通知ボタンの状態を設定
     private void setNotificationButtonState(boolean enabled) {
-        notificationButton.setSelected(enabled);
+        notificationtest.setSelected(enabled);
     }
 
     // 設定を保存するメソッド
@@ -110,13 +134,16 @@ public class SettingsActivity extends AppCompatActivity {
         cookieSwitch.setEnabled(javascriptEnabled);
     }
 
+    // 通知パーミッションをリクエスト
+
+
     // 通知許可が付与されているかを確認するメソッド
     private boolean isNotificationPermissionGranted() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             // Android 8.0以上の場合はチャネルの作成を確認
             NotificationManager notificationManager = getSystemService(NotificationManager.class);
             if (notificationManager != null) {
-                return notificationManager.getNotificationChannel("channel_id") != null;
+                return notificationManager.getNotificationChannel(CHANNEL_ID) != null;
             }
         } else {
             // Android 8.0未満の場合は通知権限のチェック
@@ -146,6 +173,60 @@ public class SettingsActivity extends AppCompatActivity {
                 .show();
     }
 
+    // 通知を送信するメソッド
+    private void sendTestNotification() {
+        // 許可が付与されているかどうかを確認
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.INTERNET) == PackageManager.PERMISSION_GRANTED) {
+            // 許可が付与されている場合、通知を送信できます
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
+                    .setSmallIcon(R.drawable.app_icon)
+                    .setContentTitle("緊急速報通知")
+                    .setContentText("緊急速報通知設定が完了しました。\nMHSCSystemは現在正常に稼働しています。\n震度５弱以上の地震・大津波警報・テロ情報等を受信した際には国内最速レベルでお知らせします。")
+                    .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                    .setAutoCancel(true);
+
+            NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+            notificationManager.notify(9999, builder.build());
+        } else {
+            // 許可が付与されていない場合、ユーザーにリクエストを行います
+            showNotificationPermissionDialog();
+        }
+    }
+
+    // 許可リクエストの結果を処理
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == REQUEST_NOTIFICATION_PERMISSION) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // 許可が付与された場合、通知の送信を続行できます
+                sendTestNotification();
+            } else {
+                showPermissionDeniedDialog();
+            }
+        }
+    }
+
+    // 許可が拒否された場合に表示するダイアログ
+    private void showPermissionDeniedDialog() {
+        new AlertDialog.Builder(this)
+                .setTitle("許可が拒否されました")
+                .setMessage("通知を送信するためには許可が必要です。設定画面から許可を設定してください。")
+                .setPositiveButton("設定を開く", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        openNotificationSettings(); // 設定画面を開く処理を呼び出す
+                    }
+                })
+                .setNegativeButton("キャンセル", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // ダイアログがキャンセルされた場合の処理を追加
+                    }
+                })
+                .show();
+    }
+
     // 通知設定画面を開くメソッド
     private void openNotificationSettings() {
         Intent intent;
@@ -157,5 +238,21 @@ public class SettingsActivity extends AppCompatActivity {
                     .setData(Uri.fromParts("package", getPackageName(), null));
         }
         startActivityForResult(intent, REQUEST_NOTIFICATION_PERMISSION);
+    }
+
+    // 通知チャネルを作成するメソッド
+    private void createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel(
+                    CHANNEL_ID,
+                    "緊急速報通知・MHSCS",
+                    NotificationManager.IMPORTANCE_DEFAULT);
+            channel.setDescription("震度５弱以上の地震・大津波警報・テロ情報等を受信した際には国内最速レベルでお知らせします");
+
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            if (notificationManager != null) {
+                notificationManager.createNotificationChannel(channel);
+            }
+        }
     }
 }

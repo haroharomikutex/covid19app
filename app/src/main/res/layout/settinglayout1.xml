@@ -31,6 +31,14 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+            <Button
+                android:id="@+id/showAllFeaturesButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="全ての機能"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="0dp"
+                android:onClick="onShowAllFeaturesButtonClick" />
 
             <!-- ボタンをタップして表示するビュー -->
             <Button
@@ -38,9 +46,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="設定/セキュリティとプライバシー"
-                android:layout_marginTop="0dp"
+                android:layout_marginTop="60dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/showAllFeaturesButton"
                 android:onClick="onShowSettingsButtonClick" />
 
             <!-- 以下、設定関連のビューグループ -->
@@ -49,7 +58,7 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:visibility="gone"
-                app:constraint_referenced_ids="textViewWebviewSettings, textViewJavaScript, switchJavaScript, textViewJavaScriptDescription, textViewRestartNoteJavaScript, textViewCookie, switchCookie, textViewCookieDescription, textViewRestartNoteCookie, textNoticeSettings, textViewNoticeMHSCDescription, textViewNoticeSettings2, switchNotification, mhcore, mhcore2, btnBack"
+                app:constraint_referenced_ids="testNotificationReceiveButton, textViewWebviewSettings, textViewJavaScript, switchJavaScript, textViewJavaScriptDescription, textViewRestartNoteJavaScript, textViewCookie, switchCookie, textViewCookieDescription, textViewRestartNoteCookie, textNoticeSettings, textViewNoticeMHSCDescription, textViewNoticeSettings2, switchNotification, mhcore, mhcore2, btnBack"
                 app:layout_constraintTop_toBottomOf="@id/showSettingsButton" />
 
             <!-- 以下、設定関連のビューは settingsGroup 内に配置 -->
@@ -213,6 +222,16 @@
                 app:layout_constraintTop_toBottomOf="@id/textViewNoticeSettings2"
                 app:layout_constraintEnd_toEndOf="parent" />
 
+            <!-- テスト通知受信ボタン -->
+            <Button
+                android:id="@+id/testNotificationReceiveButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="テスト通知受信ボタン"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintTop_toBottomOf="@id/switchNotification"
+                app:layout_constraintEnd_toEndOf="parent" />
 
             <!-- MHSuperCoreSystemについてのタイトル -->
             <TextView
@@ -222,7 +241,7 @@
                 android:text="MHSuperCoreSystemについて"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/switchNotification"
+                app:layout_constraintTop_toBottomOf="@id/testNotificationReceiveButton"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="7mm" />
 
