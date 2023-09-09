@@ -34,6 +34,16 @@ public class SettingsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settinglayout1);
+        // 全ての機能ボタンがクリックされたときの処理を設定
+        Button showAllFeaturesButton = findViewById(R.id.showAllFeaturesButton);
+        showAllFeaturesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Homemenu1 アクティビティに遷移
+                Intent intent = new Intent(SettingsActivity.this, Homemenu1.class);
+                startActivity(intent);
+            }
+        });
 
         // レイアウトからスイッチとボタンを取得
         javascriptSwitch = findViewById(R.id.switchJavaScript);

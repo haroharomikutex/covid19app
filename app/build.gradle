@@ -10,8 +10,8 @@ android {
     defaultConfig {
         minSdk 21
         targetSdk 33
-        versionCode 17
-        versionName '2023.08.30.jpv1'
+        versionCode 19
+        versionName '2023.09.10.jpv1'
         multiDexEnabled true
     }
     buildTypes {
@@ -21,7 +21,7 @@ android {
             signingConfig signingConfigs.debug
         }
         release {
-            debuggable true
+            debuggable false
             minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -55,6 +55,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-messaging:23.2.1'
     implementation 'com.stephentuso:welcome:1.4.1'
     implementation 'com.squareup.okhttp3:okhttp:3.10.0'
+    implementation 'com.github.rosenpin:fading-text-view:3.2'
+
 }
 
 apply plugin: 'com.google.gms.google-services'

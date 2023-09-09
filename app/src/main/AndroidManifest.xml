@@ -36,6 +36,11 @@
             android:name=".SettingsActivity"
             android:label="Settings"
             android:theme="@style/AppTheme" />
+        <activity
+            android:name="cf.mtjp.haroharo.Homemenu1"
+            android:label="Homemenu1">
+        </activity>
+
 
         <!-- TutorialActivityの宣言 -->
         <activity
