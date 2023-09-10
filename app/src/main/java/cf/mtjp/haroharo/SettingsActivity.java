@@ -28,7 +28,7 @@ public class SettingsActivity extends AppCompatActivity {
     private Button notificationtest;
     private Group settingsGroup;
     private static final int REQUEST_NOTIFICATION_PERMISSION = 123;
-    public static final String CHANNEL_ID = "111"; // 通知チャネルID
+    public static final String CHANNEL_ID = "113"; // 通知チャネルID
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -195,6 +195,10 @@ public class SettingsActivity extends AppCompatActivity {
                     .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                     .setAutoCancel(true);
 
+            // サウンドファイルを設定
+            Uri soundUri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.soudai4sec);
+            builder.setSound(soundUri);
+
             NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
             notificationManager.notify(9999, builder.build());
         } else {
@@ -258,7 +262,9 @@ public class SettingsActivity extends AppCompatActivity {
                     "緊急速報通知・MHSCS",
                     NotificationManager.IMPORTANCE_DEFAULT);
             channel.setDescription("震度５弱以上の地震・大津波警報・テロ情報等を受信した際には国内最速レベルでお知らせします");
-
+            // サウンドファイルを設定
+            Uri soundUri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.soudai4sec);
+            channel.setSound(soundUri, null); // サウンドを設定
             NotificationManager notificationManager = getSystemService(NotificationManager.class);
             if (notificationManager != null) {
                 notificationManager.createNotificationChannel(channel);

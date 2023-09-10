@@ -40,6 +40,16 @@
             android:name="cf.mtjp.haroharo.Homemenu1"
             android:label="Homemenu1">
         </activity>
+        <receiver
+            android:name=".DialWidgetProvider"
+            android:label="Dial Widget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/dial_widget_info" />
+        </receiver>
 
 
         <!-- TutorialActivityの宣言 -->

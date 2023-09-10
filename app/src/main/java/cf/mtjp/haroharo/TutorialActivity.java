@@ -2,6 +2,7 @@ package cf.mtjp.haroharo;
 
 import android.app.Activity;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import cf.mtjp.haroharo.R.drawable;
 import com.stephentuso.welcome.BackgroundColor;
@@ -12,6 +13,28 @@ import com.stephentuso.welcome.WelcomeConfiguration;
 import com.stephentuso.welcome.WelcomeHelper;
 public final class TutorialActivity extends WelcomeActivity {
 
+    private MediaPlayer mediaPlayer;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        // メディアプレーヤーを初期化し、サウンドファイルを再生
+        mediaPlayer = MediaPlayer.create(this, R.raw.soudai20sec); // ファイル指定
+        mediaPlayer.setLooping(false); // サウンドをループさせない
+        mediaPlayer.start();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        // アクティビティが破棄されるときにメディアプレーヤーを解放
+        if (mediaPlayer != null) {
+            mediaPlayer.release();
+            mediaPlayer = null;
+        }
+    }
 
     protected WelcomeConfiguration configuration() {
         return new WelcomeConfiguration.Builder(this)
@@ -36,17 +59,16 @@ public final class TutorialActivity extends WelcomeActivity {
     }
 
     public static final class Companion {
-        /**
-         * まだ表示していなかったらチュートリアルを表示
-         * SharedPreferencesの管理に関しては内部でよしなにやってくれているので普通に呼ぶだけで良い
-         */
+
+         //まだ表示していなかったらチュートリアルを表示
+         //SharedPreferencesの管理に関しては内部でよしなにやってくれているので普通に呼ぶだけで良い
+
         public void showIfNeeded(Activity activity, Bundle savedInstanceState) {
             (new WelcomeHelper(activity, TutorialActivity.class)).show(savedInstanceState);
         }
 
-        /**
-         * 強制的にチュートリアルを表示したい時にはこちらを呼ぶ
-         */
+        //強制的にチュートリアルを表示したい時にはこちらを呼ぶ
+
         public void showForcibly(Activity activity) {
             (new WelcomeHelper(activity, TutorialActivity.class)).forceShow();
         }
