@@ -1,10 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -21,16 +21,7 @@
 
     </LinearLayout>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/_fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_anchor="@id/bottomAppBar"
-        app:layout_anchorGravity="end|bottom"
-        android:backgroundTint="@color/colorPrimary"
-        app:srcCompat="@drawable/koushin" />
-
-
+    <!-- BottomAppBarをCoordinatorLayoutにラップ -->
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bottomAppBar"
         style="@style/Widget.MaterialComponents.BottomAppBar.Colored"
@@ -44,11 +35,9 @@
             android:id="@+id/btnSettings"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="メニュー"
+            android:text="設定"
             android:textColor="@android:color/white"
             android:layout_gravity="end"/>
-
-
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnTutorial"
@@ -60,6 +49,15 @@
 
     </com.google.android.material.bottomappbar.BottomAppBar>
 
+    <!-- FloatingActionButtonを中央に移動 -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_anchor="@id/bottomAppBar"
+        app:layout_anchorGravity="center|bottom"
+        android:backgroundTint="@color/colorPrimary"
+        app:srcCompat="@drawable/koushin" />
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/sc_tov_pb_progress_bar"
@@ -68,7 +66,5 @@
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
         app:lottie_rawRes="@raw/loadanime" />
-
-
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

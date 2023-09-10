@@ -1,24 +1,33 @@
 package cf.mtjp.haroharo;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import cf.mtjp.haroharo.R.drawable;
+import android.widget.Toolbar;
+
 import com.stephentuso.welcome.BackgroundColor;
 import com.stephentuso.welcome.BasicPage;
 import com.stephentuso.welcome.TitlePage;
 import com.stephentuso.welcome.WelcomeActivity;
 import com.stephentuso.welcome.WelcomeConfiguration;
 import com.stephentuso.welcome.WelcomeHelper;
+
+import cf.mtjp.haroharo.R.drawable;
 public final class TutorialActivity extends WelcomeActivity {
 
     private MediaPlayer mediaPlayer;
 
+    private void startTutorialActivity() {
+        // TutorialActivity のクラス名を指定して Intent を作成
+        Intent intent = new Intent(this, TutorialActivity.class);
+        startActivity(intent);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         // メディアプレーヤーを初期化し、サウンドファイルを再生
         mediaPlayer = MediaPlayer.create(this, R.raw.soudai20sec); // ファイル指定
         mediaPlayer.setLooping(false); // サウンドをループさせない

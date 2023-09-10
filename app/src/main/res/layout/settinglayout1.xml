@@ -27,7 +27,8 @@
         android:layout_height="0dp"
         android:fillViewport="true"
         app:layout_constraintTop_toBottomOf="@id/titleTextView"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="16dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -37,6 +38,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="全ての機能"
+                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginTop="0dp"
                 android:onClick="onShowAllFeaturesButtonClick" />
@@ -59,7 +61,7 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:visibility="gone"
-                app:constraint_referenced_ids="testNotificationReceiveButton, textViewWebviewSettings, textViewJavaScript, switchJavaScript, textViewJavaScriptDescription, textViewRestartNoteJavaScript, textViewCookie, switchCookie, textViewCookieDescription, textViewRestartNoteCookie, textNoticeSettings, textViewNoticeMHSCDescription, textViewNoticeSettings2, switchNotification, mhcore, mhcore2, btnBack"
+                app:constraint_referenced_ids="testNotificationReceiveButton, textViewWebviewSettings, textViewJavaScript, switchJavaScript, textViewJavaScriptDescription, textViewRestartNoteJavaScript, textViewCookie, switchCookie, textViewCookieDescription, textViewRestartNoteCookie, textNoticeSettings, textViewNoticeMHSCDescription, textViewNoticeSettings2, switchNotification, mhcore, mhcore2"
                 app:layout_constraintTop_toBottomOf="@id/showSettingsButton" />
 
             <!-- 以下、設定関連のビューは settingsGroup 内に配置 -->
@@ -266,7 +268,8 @@
                 android:text="戻る"
                 android:layout_gravity="end"
                 android:layout_marginTop="16dp"
-                app:layout_constraintTop_toBottomOf="@id/mhcore2"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/showSettingsButton"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginEnd="16dp" />
         </androidx.constraintlayout.widget.ConstraintLayout>

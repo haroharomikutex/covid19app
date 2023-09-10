@@ -194,7 +194,7 @@ public class MainActivity extends AppCompatActivity {
         vib.vibrate((long) (100));
         pop.setTitle("ようこそ");
         pop.setIcon(R.drawable.image_10);
-        pop.setMessage("【開発者からのお知らせ】\nこの度はシズスマ！(静岡スマート情報ポータルアプリ)をダウンロード頂きありがとうございます。\nこのアプリは静岡県の経済活動を活性化するとともに食品ロスの削減や自然豊かな静岡県の魅力を県内外にPRするアプリです。\nアプリのサポートが必要な場合は、shizusuma@gmail.comまでお願い致します。\n【システムメッセージ】\n現在、システムメッセージはありません\n\n==============\nバージョン19.0.0 \n");
+        pop.setMessage("【開発者からのお知らせ】\nこの度はシズスマ！(静岡スマート情報ポータルアプリ)をダウンロード頂きありがとうございます。\nこのアプリは静岡県の経済活動を活性化するとともに食品ロスの削減や自然豊かな静岡県の魅力を県内外にPRするアプリです。\nアプリのサポートが必要な場合は、shizusuma@gmail.comまでお願い致します。\n【システムメッセージ】\n現在、システムメッセージはありません\n\n==============\nバージョン20.0.0 \n");
         pop.setPositiveButton("スタート", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
