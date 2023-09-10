@@ -1,4 +1,5 @@
 <resources>
+
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -6,13 +7,27 @@
         <item name="colorControlHighlight">@color/colorControlHighlight</item>
         <item name="colorControlNormal">@color/colorControlNormal</item>
     </style>
+
     <style name="AppTheme.FullScreen" parent="AppTheme">
         <item name="android:windowFullscreen">false</item>
         <item name="android:windowContentOverlay">@null</item>
     </style>
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
     <style name="AppTheme.Launcher">
         <item name="android:windowBackground">@drawable/launcher_screen</item>
+    </style>
+
+    <style name="Widget.Shizusuma.AppWidget.Container" parent="android:Widget">
+        <item name="android:id">@android:id/background</item>
+        <item name="android:background">?android:attr/colorBackground</item>
+    </style>
+
+    <style name="Widget.Shizusuma.AppWidget.InnerView" parent="android:Widget">
+        <item name="android:background">?android:attr/colorBackground</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
     </style>
 </resources>

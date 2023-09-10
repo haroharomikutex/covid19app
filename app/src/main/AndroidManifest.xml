@@ -2,11 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!-- 必要なパーミッションの設定 -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application
         android:allowBackup="true"
@@ -18,11 +19,36 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
 
+        <!-- SOS 110 Widgetの設定 -->
+        <receiver
+            android:name=".sos110"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/sos110_info" />
+        </receiver>
+
+        <!-- SOS 119 Widgetの設定 -->
+        <receiver
+            android:name=".sos119"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/sos119_info" />
+        </receiver>
+
         <!-- MainActivityの宣言 -->
         <activity
             android:name=".MainActivity"
             android:label="静岡スマート情報ポータル" />
 
+        <!-- oplogoの宣言 -->
         <activity
             android:name=".oplogo"
             android:exported="true">
@@ -32,31 +58,23 @@
             </intent-filter>
         </activity>
 
+        <!-- SettingsActivityの宣言 -->
         <activity
             android:name=".SettingsActivity"
             android:label="Settings"
             android:theme="@style/AppTheme" />
-        <activity
-            android:name="cf.mtjp.haroharo.Homemenu1"
-            android:label="Homemenu1">
-        </activity>
-        <receiver
-            android:name=".DialWidgetProvider"
-            android:label="Dial Widget">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/dial_widget_info" />
-        </receiver>
 
+        <!-- Homemenu1の宣言 -->
+        <activity
+            android:name=".Homemenu1"
+            android:label="Homemenu1" />
 
         <!-- TutorialActivityの宣言 -->
         <activity
             android:name=".TutorialActivity"
             android:theme="@style/WelcomeScreenTheme" />
 
+        <!-- MyFirebaseMessagingServiceの宣言 -->
         <service
             android:name=".MyFirebaseMessagingService"
             android:exported="false">
@@ -64,7 +82,6 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-
     </application>
 
 </manifest>

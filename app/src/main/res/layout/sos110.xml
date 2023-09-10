@@ -1,0 +1,15 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/Widget.Shizusuma.AppWidget.Container"
+    android:layout_width="110dp"
+    android:layout_height="110dp"
+    android:theme="@style/AppTheme.AppWidgetContainer">
+
+<ImageView
+android:id="@+id/sos_image"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+    android:src="@drawable/sos110"
+    android:layout_centerInParent="true"
+    android:contentDescription="Call 110" />
+    </RelativeLayout>
+
