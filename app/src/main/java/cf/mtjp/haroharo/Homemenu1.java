@@ -38,9 +38,9 @@ public class Homemenu1 extends AppCompatActivity {
     // 確認ダイアログを表示するメソッド
     private void showConfirmationDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("緊急速報システムセットアップ");
+        builder.setTitle("緊急通報システムセットアップ");
         builder.setIcon(R.drawable.attention);
-        builder.setMessage("かんたん緊急速報システムを設定しますか？\nこの機能を使用すると、緊急時ワンタップで110番通報及び119番に通報することができます");
+        builder.setMessage("かんたん緊急速報システムを設定しますか？\nこの機能を使用すると、緊急時ワンタップで110番及び119番に通報することができます");
         builder.setPositiveButton("はい", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -66,7 +66,7 @@ public class Homemenu1 extends AppCompatActivity {
         if ("ウィジット設置方法".equals(selection)) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle("緊急通報ウィジット設定方法");
-            builder.setMessage("1.ホーム画面に移動します\n2.ホーム画面の空いているスペースを長押しします\n3.「ウィジット」をタップします\n4.ウィジット一覧から「SOS」を探し長押しします\n5.ウィジットをホームスクリーン状にドラック＆ドロップします");
+            builder.setMessage("1.ホーム画面に移動します\n2.ホーム画面の空いているスペースを長押しします\n3.「ウィジット」をタップします\n4.ウィジット一覧から「SOS」を探し長押しします\n5.ウィジットをホームスクリーン上にドラック＆ドロップします");
             builder.setPositiveButton("閉じる", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
@@ -79,6 +79,5 @@ public class Homemenu1 extends AppCompatActivity {
             dialog.setCanceledOnTouchOutside(false);
             dialog.show();
         }
-        // 他の選択肢に対するポップアップダイアログの表示ロジックを追加できます
     }
 }
