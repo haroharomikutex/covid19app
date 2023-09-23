@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -20,7 +21,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SettingsActivity extends AppCompatActivity {
+public class noticesoundset extends AppCompatActivity {
 
     private SharedPreferences preferences;
     private String selectedRingtoneUri; // 選択された通知音のURI
@@ -49,8 +50,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         ListView soundListView = dialogView.findViewById(R.id.soundListView);
         Button cancelButton = dialogView.findViewById(R.id.cancelButton);
-
-        // リングトーンのリストを取得するためのカーソルを取得
+// リングトーンのリストを取得するためのカーソルを取得
         Cursor cursor = RingtoneManager.getCursor(this);
 
         final List<String> ringtoneTitles = new ArrayList<>();
@@ -67,6 +67,7 @@ public class SettingsActivity extends AppCompatActivity {
             cursor.close();
         }
 
+
         int selectedRingtoneIndex = -1;
         if (selectedRingtoneUri != null) {
             for (int i = 0; i < ringtoneUris.size(); i++) {
@@ -77,7 +78,7 @@ public class SettingsActivity extends AppCompatActivity {
             }
         }
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_single_choice, ringtoneTitles);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_single_choice, android.R.id.text1, ringtoneTitles);
         soundListView.setAdapter(adapter);
         soundListView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         soundListView.setItemChecked(selectedRingtoneIndex, true);
