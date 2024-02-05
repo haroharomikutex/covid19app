@@ -23,6 +23,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.Switch;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -51,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
     private ProgressBar progressBar;
     private TutorialActivity Companion;
     private Toasty Toasty;
+    private Switch switchStealthMode;
     private MediaPlayer mediaPlayer;
     private boolean isPlaySelected = false;
     private static final int REQUEST_SETTINGS = 3;
@@ -64,6 +66,8 @@ public class MainActivity extends AppCompatActivity {
     private boolean notificationPermissionRequested;
     private static final String PREF_SHOW_NOTIFICATION_DIALOG = "show_notification_dialog";
     private static final int REQUEST_NOTIFICATION_PERMISSION = 123;
+    public static final String KEY_SWITCH_STEALTH_MODE = "switch_stealth_mode";
+
     private boolean shouldShowNotificationDialog() {
         return preferences.getBoolean(PREF_SHOW_NOTIFICATION_DIALOG, true);
     }
@@ -72,6 +76,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle _savedInstanceState) {
         super.onCreate(_savedInstanceState);
         setTheme(R.style.AppTheme);
+
+        // switchStealthModeのインスタンスを取得
+        View customLayout = getLayoutInflater().inflate(R.layout.settinglayout1, null);
+        setContentView(customLayout);
+        switchStealthMode = findViewById(R.id.switchStealthMode);
+
         setContentView(R.layout.main);
         preferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         // 通知権限のチェックとダイアログ表示
@@ -84,7 +94,6 @@ public class MainActivity extends AppCompatActivity {
                 showCustomDialog();
             }
         }
-
         _fab = findViewById(R.id._fab);
         webview1 = findViewById(R.id.sc_tov_wv_tos);
         MaterialButton btnTutorial = findViewById(R.id.btnTutorial);
@@ -94,6 +103,17 @@ public class MainActivity extends AppCompatActivity {
         initialize(_savedInstanceState);
         loadSettings();
         initializeLogic();
+        // switchStealthModeの状態変更リスナーを設定
+        switchStealthMode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                // switchStealthModeの状態が変更された時の処理
+                handleStealthModeSwitch(isChecked);
+
+                // switchStealthModeの状態をSharedPreferencesに保存
+                saveStealthModeSetting(isChecked);
+            }
+        });
         btnTutorial.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -109,7 +129,21 @@ public class MainActivity extends AppCompatActivity {
                 showSettings();
             }
         });
+        // switchStealthModeの状態を読み込み
+        boolean isStealthModeEnabled = preferences.getBoolean("switchStealthMode", false);
+        switchStealthMode.setChecked(isStealthModeEnabled);
 
+        // switchStealthModeの状態変更リスナーを設定
+        switchStealthMode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                // switchStealthModeの状態が変更された時の処理
+                handleStealthModeSwitch(isChecked);
+            }
+        });
+
+        // 初回は状態を確認して処理
+        handleStealthModeSwitch(isStealthModeEnabled);
         webview1.setWebViewClient(new WebViewClient() {
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
@@ -156,6 +190,31 @@ public class MainActivity extends AppCompatActivity {
                 pop.create().show();
             }
         });
+    }
+
+    private void handleStealthModeSwitch(boolean isChecked) {
+        // switchStealthModeの状態に基づいてURLを変更
+        String url = isChecked ? "https://appshizuoka.gq" : "http://appshizuoka.gq";
+
+        // HTTP通信の禁止設定
+        if (isChecked) {
+            webview1.getSettings().setBlockNetworkLoads(true);
+        } else {
+            webview1.getSettings().setBlockNetworkLoads(false);
+        }
+
+        // SharedPreferencesに設定を保存
+        saveStealthModeSetting(isChecked);
+
+        webview1.loadUrl(url);
+    }
+
+
+    private void saveStealthModeSetting(boolean isChecked) {
+        // SharedPreferencesに設定を保存
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putBoolean("switchStealthMode", isChecked);
+        editor.apply();
     }
 
     private void showSettings() {
@@ -371,4 +430,5 @@ public class MainActivity extends AppCompatActivity {
             player.release();
         }
     }
+
 }

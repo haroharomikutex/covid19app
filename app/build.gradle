@@ -10,8 +10,8 @@ android {
     defaultConfig {
         minSdk 21
         targetSdk 33
-        versionCode 20
-        versionName '2023.09.11.jpv2'
+        versionCode 22
+        versionName '2024.02.06.jpv1'
         multiDexEnabled true
     }
     buildTypes {
