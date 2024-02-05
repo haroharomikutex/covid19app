@@ -4,17 +4,18 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.database.Cursor;
-import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -50,23 +51,32 @@ public class noticesoundset extends AppCompatActivity {
 
         ListView soundListView = dialogView.findViewById(R.id.soundListView);
         Button cancelButton = dialogView.findViewById(R.id.cancelButton);
-// リングトーンのリストを取得するためのカーソルを取得
-        Cursor cursor = RingtoneManager.getCursor(this);
+
+        // 修正: RingtoneManager.getCursor()の呼び出しを修正
+        RingtoneManager ringtoneManager = new RingtoneManager(this);
+        ringtoneManager.setType(RingtoneManager.TYPE_NOTIFICATION);
+        Cursor cursor = ringtoneManager.getCursor();
 
         final List<String> ringtoneTitles = new ArrayList<>();
         final List<String> ringtoneUris = new ArrayList<>();
 
-        if (cursor != null) {
-            while (cursor.moveToNext()) {
-                String title = cursor.getString(cursor.getColumnIndex(RingtoneManager.TITLE));
-                Uri uri = Uri.parse(cursor.getString(cursor.getColumnIndex(RingtoneManager.URI)) + "/" + cursor.getString(cursor.getColumnIndex(RingtoneManager.ID)));
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                int titleIndex = cursor.getColumnIndex(MediaStore.Audio.Media.TITLE);
+                int idIndex = cursor.getColumnIndex(MediaStore.Audio.Media._ID);
 
-                ringtoneTitles.add(title);
-                ringtoneUris.add(uri.toString());
-            }
+                // カラムインデックスが有効かどうかを確認
+                if (titleIndex >= 0 && idIndex >= 0) {
+                    String title = cursor.getString(titleIndex);
+                    Uri uri = Uri.withAppendedPath(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, cursor.getString(idIndex));
+
+                    ringtoneTitles.add(title);
+                    ringtoneUris.add(uri.toString());
+                }
+            } while (cursor.moveToNext());
+
             cursor.close();
         }
-
 
         int selectedRingtoneIndex = -1;
         if (selectedRingtoneUri != null) {
