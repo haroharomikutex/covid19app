@@ -49,7 +49,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="設定/セキュリティとプライバシー"
-                android:layout_marginTop="160dp"
+                android:layout_marginTop="60dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/showAllFeaturesButton"
@@ -61,7 +61,7 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:visibility="gone"
-                app:constraint_referenced_ids="testNotificationReceiveButton, textViewWebviewSettings, textViewJavaScript, switchJavaScript, textViewJavaScriptDescription, textViewRestartNoteJavaScript, textViewCookie, switchCookie, textViewCookieDescription, textViewRestartNoteCookie, textNoticeSettings, textViewNoticeMHSCDescription, textViewNoticeSettings2, switchNotification, mhcore, mhcore2, stealthModeDescription, switchStealthMode, stealthModeTitle"
+                app:constraint_referenced_ids="testNotificationReceiveButton, textViewWebviewSettings, textViewJavaScript, switchJavaScript, textViewJavaScriptDescription, textViewRestartNoteJavaScript, textViewCookie, switchCookie, textViewCookieDescription, textViewRestartNoteCookie, textNoticeSettings, textViewNoticeMHSCDescription, textViewNoticeSettings2, switchNotification, mhcore, mhcore2"
                 app:layout_constraintTop_toBottomOf="@id/showSettingsButton" />
 
             <!-- 以下、設定関連のビューは settingsGroup 内に配置 -->
@@ -235,41 +235,6 @@
                 android:layout_marginEnd="16dp"
                 app:layout_constraintTop_toBottomOf="@id/switchNotification"
                 app:layout_constraintEnd_toEndOf="parent" />
-            <!-- ステルス通信モードに関するタイトル -->
-            <TextView
-                android:id="@+id/stealthModeTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="ステルス通信モード\n(災害・通信障害用)"
-                android:textSize="20sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/testNotificationReceiveButton"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp" />
-
-            <!-- ステルス通信モードに関する説明文 -->
-            <TextView
-                android:id="@+id/stealthModeDescription"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="この機能を有効にするとアプリ内の通信を暗号化に限定します。一部機能が利用できなくなりますが通信プライバシーを確保することができます。「00000JAPAN」など無認証公衆Wi-Fiを利用する際に有効にしてください"
-                android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/stealthModeTitle"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp" />
-
-            <!-- ステルス通信モードのスイッチ -->
-            <Switch
-                android:id="@+id/switchStealthMode"
-                android:layout_width="wrap_content"
-                android:layout_height="48dp"
-                android:layout_marginStart="8dp"
-                app:layout_constraintBaseline_toBaselineOf="@id/stealthModeTitle"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:textSize="18sp"
-                android:layout_marginTop="1028dp" />
 
             <!-- MHSuperCoreSystemについてのタイトル -->
             <TextView
@@ -279,9 +244,9 @@
                 android:text="MHSuperCoreSystemについて"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/switchStealthMode"
+                app:layout_constraintTop_toBottomOf="@id/testNotificationReceiveButton"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="128dp" />
+                android:layout_marginTop="7mm" />
 
             <!-- MHSuperCoreSystemについての説明文 -->
             <TextView
@@ -293,32 +258,20 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/mhcore"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="8dp" />
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="5dp" />
 
             <Button
                 android:id="@+id/btnBack"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="保存して戻る"
+                android:text="戻る"
                 android:layout_gravity="end"
                 android:layout_marginTop="16dp"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/showSettingsButton"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginEnd="16dp" />
-            <Button
-                android:id="@+id/btnBack2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="保存せずに戻る"
-                android:layout_gravity="end"
-                android:layout_marginTop="85dp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/showSettingsButton"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="16dp" />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

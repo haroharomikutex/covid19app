@@ -13,24 +13,20 @@ import android.provider.Settings;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Switch;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.constraintlayout.widget.Group;
-import es.dmoral.toasty.Toasty;
-
 
 public class SettingsActivity extends AppCompatActivity {
     private Switch javascriptSwitch;
     private Switch cookieSwitch;
     private Button notificationButton;
-    private Switch switchStealthMode;
+
     private Button notificationtest;
     private Group settingsGroup;
-
     private static final int REQUEST_NOTIFICATION_PERMISSION = 123;
     public static final String CHANNEL_ID = "113"; // 通知チャネルID
 
@@ -53,26 +49,13 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // アクティビティを終了して前の画面に戻る
-                saveSettings();
                 finish();
             }
         });
-        Button btnBack2 = findViewById(R.id.btnBack2);
-
-        btnBack2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // アクティビティを終了して前の画面に戻る
-                Toasty.success(getApplicationContext(), "設定を保存せず終了しました", Toast.LENGTH_SHORT, false).show();
-                finish();
-            }
-        });
-
 
         // レイアウトからスイッチとボタンを取得
         javascriptSwitch = findViewById(R.id.switchJavaScript);
         cookieSwitch = findViewById(R.id.switchCookie);
-        switchStealthMode = findViewById(R.id.switchStealthMode);
         notificationButton = findViewById(R.id.switchNotification); // 通知のボタンに変更
         settingsGroup = findViewById(R.id.settingsGroup);
         notificationtest = findViewById(R.id.testNotificationReceiveButton);
@@ -106,11 +89,7 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 showNotificationPermissionDialog();
-
-                // switchStealthModeの状態をSharedPreferencesに保存
-                saveStealthModeSetting(switchStealthMode.isChecked());
             }
-
         });
 
 
@@ -134,7 +113,6 @@ public class SettingsActivity extends AppCompatActivity {
         notificationtest.setSelected(enabled);
     }
 
-
     // 設定を保存するメソッド
     private void saveSettings() {
         // スイッチの現在の状態を取得
@@ -147,7 +125,6 @@ public class SettingsActivity extends AppCompatActivity {
                 .putBoolean(MainActivity.KEY_JAVASCRIPT_ENABLED, javascriptEnabled)
                 .putBoolean(MainActivity.KEY_COOKIE_ENABLED, cookieEnabled)
                 .apply();
-        Toasty.success(getApplicationContext(), "設定を保存しました\nアプリを再度起動するとデフォルトに戻ります", Toast.LENGTH_SHORT, false).show();
     }
 
     // 設定を読み込むメソッド
@@ -167,10 +144,8 @@ public class SettingsActivity extends AppCompatActivity {
         cookieSwitch.setEnabled(javascriptEnabled);
     }
 
-    // トーストを表示するメソッド
-    private void showToast(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
-    }
+    // 通知パーミッションをリクエスト
+
 
     // 通知許可が付与されているかを確認するメソッド
     private boolean isNotificationPermissionGranted() {
@@ -265,13 +240,7 @@ public class SettingsActivity extends AppCompatActivity {
                 })
                 .show();
     }
-    private void saveStealthModeSetting(boolean isChecked) {
-        // SharedPreferencesに設定を保存
-        getSharedPreferences(MainActivity.PREFS_NAME, MODE_PRIVATE)
-                .edit()
-                .putBoolean(MainActivity.KEY_SWITCH_STEALTH_MODE, isChecked)
-                .apply();
-    }
+
     // 通知設定画面を開くメソッド
     private void openNotificationSettings() {
         Intent intent;
@@ -301,10 +270,5 @@ public class SettingsActivity extends AppCompatActivity {
                 notificationManager.createNotificationChannel(channel);
             }
         }
-    }
-    @Override
-    public void onBackPressed() {
-        Toasty.success(getApplicationContext(), "設定を保存せず終了しました", Toast.LENGTH_SHORT, false).show();
-        super.onBackPressed();
     }
 }
